@@ -2,9 +2,9 @@
 Repository for the "Progettazione di Applicazioni Web e Mobile" course of the University of Camerino
 
 ## Intro/Scenario
-	Prenotazione obrellone
+Prenotazione ombrellone
 ## Fronend
-	Templete di grafica preso da:
+Templete di grafica preso da:
 	//TODO
 	// Il primo che ho trovato: https://www.creative-tim.com/templates/angular-free
 ## Backend
