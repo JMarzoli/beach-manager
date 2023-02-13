@@ -2,9 +2,8 @@
 Repository for the "Progettazione di Applicazioni Web e Mobile" course of the University of Camerino
 
 ## Intro/Scenario
-<<<<<<< HEAD
 	//TODO descrizione
-	Prenotazione obrellone
+	Prenotazione ombrellone
 ### Funzinalità principali utente
 	- Login
 	- Selezione e visualizzazione spiaggie
@@ -17,9 +16,6 @@ Repository for the "Progettazione di Applicazioni Web e Mobile" course of the Un
 ### Funzionalità extra (se avanza tempo)
 	//TODO
 
-=======
-Prenotazione ombrellone
->>>>>>> 8fe38fefc6a66e98f0eb05d65634e07b4425f808
 ## Fronend
 ### Templete di grafica preso da:
 	//TODO
