@@ -6,6 +6,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'my-app',
@@ -21,7 +22,11 @@ export class LoginComponent implements OnInit{
     password: new FormControl(''),
   });
 
-  constructor(private _router: Router, private ActivatedRoute: ActivatedRoute) { 
+  constructor(
+      private _router: Router, 
+      private ActivatedRoute: ActivatedRoute, 
+      private http: HttpClient
+      ) { 
     this.message = '';
   }
 
@@ -39,19 +44,28 @@ export class LoginComponent implements OnInit{
   }
   
   submit() {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    let formObj = this.form.getRawValue();
+    let serializedForm = JSON.stringify(formObj);
+    this.http
+      .post('http://localhost:4200/api/auth/signin', serializedForm, {headers: headers})
+      .subscribe({
+        next: data => this.redirect(JSON.parse(JSON.stringify(data))),
+        error: data => this.redirect(JSON.parse(JSON.stringify(data))),
+      });
+  }
+
+  redirect(response: Object){
+    type ObjectKey = keyof typeof response;
+    const tokenKey = 'accessToken' as ObjectKey;
     var destination = 'login';
     var params = {};
-    
-    //TODO implementare chiamata a backend
-    const result = false;
-    //TODO
 
-    if(result){
+    if(response[tokenKey]){
       destination='dashboard';
     }else{
-      params = { message:result}
+      params = { message:false}
     }
-
     this._router.navigate([destination],{ 
       queryParams: params
     })
