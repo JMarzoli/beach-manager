@@ -1,11 +1,9 @@
 
-Backend
-
 Frontend
 	1. Definire interfaccia utente
 		1. Prenotazioni
 			1. Dettaglio click: visualizza dettagli/info, eliminazione, cambio data (opzionale)
-		2. Spieggie 
+		2. Spiaggie 
 			1. Dettaglio click: Selettore data inizio fine => Lista postazioni disponibile
 				1. Crezione prenotazione
 	2. Profilo utente
@@ -33,4 +31,18 @@ Database
 	1. Definizione tabelle sql con ts
 	2. Definizione swagger
 	3. Implementazione logica backend
+
+
+Abbozzo struttura tabelle: 
+	- Table Ombrelloni (Postazioni): 
+		id ombrellone (key) | numero di sdraie | costo
+
+	- Table Prenotazioni: 
+		id prenotazione (key) | id user | ombrelloni prenotati | data inizio prenotazione | data fine prenotazione | importo prenotazione
+
+	- Table Spiaggie: 
+		id spiaggia (key) | id gestore owner 
+
+	- Table Profilo Utente: 
+		id user (key) | nome | cognome | data registrazione 
 
