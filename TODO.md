@@ -9,11 +9,10 @@ Frontend
 	2. Profilo utente
 
 Backend definizione API/routing:
-	1. /api/spiaggie
-	2. /api/spiaggie/{id_spiaggia}/prenotazioni
-	3. /api/spiaggie/{id_spiaggia}/prenotazioni/{id_prenotazione}
+	1. /api/beach
+	2. /api/prenotazioni
+	3. /api/beach/{id_spiaggia}/postazioni
 	4. /api/user-data
-	5. /api/spiaggie/{id_spiaggia}/postazioni
 
 Database
 	1. Definire struttura dati
@@ -31,3 +30,4 @@ Database
 	1. Definizione tabelle sql con ts - DONE
 	2. Definizione swagger - 
 	3. Implementazione logica backend
+	4. Implementazione registrazione utente

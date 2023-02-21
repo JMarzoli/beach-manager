@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Swagger Petstore - OpenAPI 3.0
-  description: 'This is a sample Pet Store Server based on the OpenAPI 3.0 specification. '
+  title: Swagger Progetto esame PAWM Unicam - OpenAPI 3.0
+  description: "Definizione delle api utilizzate per l'elaborazione e la lettura delle finromazioni lato backend"
   termsOfService: http://swagger.io/terms/
   contact:
     email: apiteam@swagger.io
@@ -13,12 +13,29 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 paths:
+  /user-data:
+    summary: Lettura informazioni utente
+    get:
+      summary: Lettura informazioni utente
+      description: Lettura informazioni utente
+      operationId: ''
+      responses:
+        default:
+          description: Default error sample response
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Utente'
+      tags:
+        - Utente
   /beach:
-    summary: Interazione con lista
+    summary: Interazione con lista spiaggie
     get:
       summary: Lettura lista spiaggie
       description: Interazione con lista spiaggie
-      operationId: '1'
+      operationId: ''
       responses:
         default:
           description: Default error sample response
@@ -45,6 +62,226 @@ paths:
           description: Default error sample response
       tags:
         - Spiaggia
+  /beach/{beachId}:
+    summary: Interazione con singola spiaggia
+    get:
+      summary: Dettaglio spiaggia
+      description: Interazione con lista spiaggie
+      operationId: ''
+      parameters:
+        - name: beachId
+          in: path
+          description: L'id della spiaggia
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        default:
+          description: Default error sample response
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Spiaggia'
+      tags:
+        - Spiaggia
+    delete:
+      summary: Eliminazione elemento spiaggia
+      description: ''
+      operationId: ''
+      parameters:
+        - name: beachId
+          in: path
+          description: L'id della spiaggia
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Spiaggia
+  /beach/{beachId}/locations:
+    summary: Interazione con lista postazioni
+    get:
+      summary: Lettura lista postazioni
+      description: Interazione con lista postazioni
+      operationId: ''
+      parameters:
+        - name: beachId
+          in: path
+          description: L'id della spiaggia
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        default:
+          description: Default error sample response
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaPostazioni'
+      tags:
+        - Postazione
+    post:
+      summary: Aggiunta elemento postazione
+      description: ''
+      operationId: ''
+      parameters:
+        - name: beachId
+          in: path
+          description: L'id della spiaggia
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Crea una nuova postazione
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Postazione'
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Postazione
+  /beach/{beachId}/locations/{locationId}:
+    summary: Interazione con singola postazione
+    get:
+      summary: Dettaglio postazione
+      description: Dettaglio postazione
+      operationId: ''
+      parameters:
+        - name: beachId
+          in: path
+          description: L'id della spiaggia
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: locationId
+          in: path
+          description: L'id della postazione
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        default:
+          description: Default error sample response
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Postazione'
+      tags:
+        - Postazione
+    delete:
+      summary: Eliminazione elemento Postazione
+      description: ''
+      operationId: ''
+      parameters:
+        - name: beachId
+          in: path
+          description: L'id della spiaggia
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: locationId
+          in: path
+          description: L'id della postazione
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Postazione
+  /reservation:
+    summary: Interazione con lista prenotazioni
+    get:
+      summary: Lettura lista prenotazioni
+      description: Interazione con lista prenotazioni
+      operationId: ''
+      responses:
+        default:
+          description: Default error sample response
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaPostazioni'
+      tags:
+        - Prenotazione
+    post:
+      summary: Aggiunta elemento prenotazione
+      description: ''
+      operationId: '2'
+      requestBody:
+        description: Crea una nuova prenotazione
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Prenotazione'
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Prenotazione
+  /reservation/{reservationId}:
+    summary: Interazione con singola prenotazione
+    get:
+      summary: Dettaglio Prenotazione
+      description: Interazione con singola prenotazione
+      operationId: ''
+      parameters:
+        - name: reservationId
+          in: path
+          description: L'id della Prenotazione
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        default:
+          description: Default error sample response
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prenotazione'
+      tags:
+        - Prenotazione
+    delete:
+      summary: Eliminazione elemento Prenotazione
+      description: ''
+      operationId: '4'
+      parameters:
+        - name: reservationId
+          in: path
+          description: L'id della Prenotazione
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Prenotazione  
 components:
   schemas:
     ListaSpiaggie:
@@ -69,5 +306,94 @@ components:
           example: 20
       xml:
         name: Spiaggia
+    ListaPrenotazioni:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Prenotazione'
+      xml:
+        name: ListaPrenotazioni
+    Prenotazione:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        userId:
+          type: integer
+          format: int64
+          example: 10
+        locationId:
+          type: integer
+          format: int64
+          example: 20
+        date_start:
+          type: string
+          format: date-time
+          example: "01-01-2021"
+        date_end:
+          type: string
+          format: date-time
+          example: "02-01-2021"
+      xml:
+        name: Prenotazione
+    ListaPostazioni:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Postazione'
+      xml:
+        name: ListaPostazioni
+    Postazione:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        beachId:
+          type: integer
+          format: int64
+          example: 6
+        cost:
+          type: integer
+          format: int64
+          example: 300
+        ombrellaNumber:
+          type: integer
+          format: int64
+          example: 4
+      xml:
+        name: Postazione
+    Utente:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: "Mario"
+        surname:
+          type: string
+          example: "Rossi"
+        registrationDate:
+          type: string
+          format: date-time
+          example: "02-02-2034"
+        email:
+          type: string
+          example: "mario.rossi@everest.com"
+      xml:
+        name: Utente    
 tags:
   - name: Spiaggia
+  - name: Prenotazione
+  - name: Postazione
+  - name: Utente
