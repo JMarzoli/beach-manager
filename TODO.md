@@ -3,7 +3,7 @@ Frontend
 	1. Definire interfaccia utente
 		1. Prenotazioni
 			1. Dettaglio click: visualizza dettagli/info, eliminazione, cambio data (opzionale)
-		2. Spiaggie 
+		2. spiagge 
 			1. Dettaglio click: Selettore data inizio fine => Lista postazioni disponibile
 				1. Crezione prenotazione
 	2. Profilo utente

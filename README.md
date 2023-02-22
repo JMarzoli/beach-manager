@@ -6,7 +6,7 @@ Repository for the "Progettazione di Applicazioni Web e Mobile" course of the Un
 	Prenotazione ombrellone
 ### Funzinalità principali utente
 	- Login
-	- Selezione e visualizzazione spiaggie
+	- Selezione e visualizzazione spiagge
 	- Prenotazione ombrellore
 	- Gestione prenotazione
 ### Funzionalità principali gestore
@@ -38,7 +38,7 @@ Repository for the "Progettazione di Applicazioni Web e Mobile" course of the Un
 	- Table Prenotazioni: 
 		id prenotazione (key) | id user | id ombrellone | data inizio prenotazione | data fine prenotazione
 
-	- Table Spiaggie: 
+	- Table spiagge: 
 		id spiaggia (key) | id user gestore owner 
 
 	- Table Profilo Utente: 

@@ -31,10 +31,10 @@ paths:
       tags:
         - Utente
   /beach:
-    summary: Interazione con lista spiaggie
+    summary: Interazione con lista spiagge
     get:
-      summary: Lettura lista spiaggie
-      description: Interazione con lista spiaggie
+      summary: Lettura lista spiagge
+      description: Interazione con lista spiagge
       operationId: ''
       responses:
         default:
@@ -44,7 +44,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListaSpiaggie'
+                $ref: '#/components/schemas/Listaspiagge'
       tags:
         - Spiaggia
     post:
@@ -66,7 +66,7 @@ paths:
     summary: Interazione con singola spiaggia
     get:
       summary: Dettaglio spiaggia
-      description: Interazione con lista spiaggie
+      description: Interazione con lista spiagge
       operationId: ''
       parameters:
         - name: beachId
@@ -284,7 +284,7 @@ paths:
         - Prenotazione  
 components:
   schemas:
-    ListaSpiaggie:
+    Listaspiagge:
       type: object
       properties:
         elements:
