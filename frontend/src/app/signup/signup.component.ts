@@ -21,7 +21,13 @@ export class SignupComponent implements OnInit {
     focus : boolean; 
     focus1 : boolean; 
     focus2: boolean;
-    form: FormGroup;
+    focus3: boolean; 
+    form: FormGroup = new FormGroup({
+        username : new FormControl(''),
+        email : new FormControl(''),
+        password : new FormControl(''),
+        role : new FormControl('["user"]')
+     });
     
     constructor(
         private _router: Router, 
@@ -32,11 +38,8 @@ export class SignupComponent implements OnInit {
         this.focus = false; 
         this.focus1 = false; 
         this.focus2 = false;
-        this.form = new FormGroup({
-            email : new FormControl(''),
-            username : new FormControl(''),
-            password : new FormControl('')
-         })}
+        this.focus3 = false; 
+        }
     
     ngOnInit(): void {
         var body = document.getElementsByTagName('body')[0];
