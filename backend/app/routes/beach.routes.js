@@ -15,4 +15,19 @@ module.exports = function(app) {
     [authJwt.verifyToken],
     controller.readBeaches
   );
+  app.get(
+    "/api/beach/:beachId",
+    [authJwt.verifyToken],
+    controller.readBeach
+  );
+  app.post(
+    "/api/beach",
+    [authJwt.verifyToken],
+    controller.addBeach
+  );
+  app.delete(
+    "/api/beach/:beachId",
+    [authJwt.verifyToken],
+    controller.deleteBeach
+  );
 };
