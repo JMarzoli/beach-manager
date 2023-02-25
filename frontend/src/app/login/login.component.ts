@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit{
 
   // Se on init il parametro message è valorizzato a false scrivo invalid credentials
   ngOnInit(): void {
-
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('login-page');
 
@@ -58,7 +57,9 @@ export class LoginComponent implements OnInit{
   submit() {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let formObj = this.form.getRawValue();
-    let serializedForm = JSON.stringify(formObj);
+    console.log("raw form: " + formObj);
+    let serializedForm = JSON.stringify(formObj); 
+    console.log("json form: " + serializedForm); 
     this.http
       .post('http://localhost:4200/api/auth/signin', serializedForm, {headers: headers})
       .subscribe({

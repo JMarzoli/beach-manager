@@ -1,1 +1,43 @@
-<p>dashboard works!</p>
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        
+        <div class="page-header-image rellax-header" style="background-image: url('assets/img/login-2.jpg');" data-rellax-speed="-8"></div>
+        
+        <div class="container">
+
+            <div class="content-center">
+
+                <div class="photo-container">
+
+                    <img src="assets/img/logo.png" alt="">
+                    <h3 class="title">BENVENUTO NEL TUO PROFILO</h3>
+                    <p class="category">Da qui potrai gestire le tue prenotazioni ed effettuarne altre</p>
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <div class="container">
+
+            <div class="">
+
+                <div class="datepicker-container">
+                    <div class="form-group">
+                      <input class="form-control datetimepicker" placeholder="06/07/2017"
+                           name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

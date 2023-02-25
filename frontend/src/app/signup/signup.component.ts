@@ -60,7 +60,9 @@ export class SignupComponent implements OnInit {
     submit() {
         const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
         let formObj = this.form.getRawValue();
+        console.log("raw form: " + formObj);
         let serializedForm = JSON.stringify(formObj); 
+        console.log("json form: " + serializedForm); 
         this.http
             .post('http://localhost:4200/api/auth/signup', serializedForm, {headers: headers})
             .subscribe({
