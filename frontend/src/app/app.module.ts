@@ -1,29 +1,26 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';   da importare ma da errore
 
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { SignupModule } from './signup/signup.module';
+import { RegistrationComponent } from './registration/registration.component';
+import { BeachesComponent } from './beaches/beaches.component';
+import { DatesComponent } from './dates/dates.component';
+import { LocationsComponent } from './locations/locations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    RegistrationComponent,
+    BeachesComponent,
+    DatesComponent,
+    LocationsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LoginModule,
-    SignupModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    RouterModule
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]

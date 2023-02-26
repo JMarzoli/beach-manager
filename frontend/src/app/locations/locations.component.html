@@ -4,21 +4,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="/src/assets/template/assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="/src/assets/template/assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    Beach - Login
+    Location Picker - Reservation
   </title>
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-  <!-- Nucleo Icons -->
-  <link href="/src/app/template/assets/css/nucleo-icons.css" rel="stylesheet"/>
-  <!-- Font Awesome Icons -->
-  <link href="/src/app/template/assets/css/font-awesome.css" rel="stylesheet"/>
-  <link href="/src/app/template/assets/css/font-awesome.css" rel="stylesheet"/>
-  <!-- CSS Files -->
-  <link href="/src/assets/template/assets/css/argon-design-system.css?v=1.2.2" rel="stylesheet"/>
 </head>
 
 <body class="login-page">
@@ -27,7 +17,7 @@
     <div class="container">
       <!-- logo alto sx -->
       <a class="navbar-brand mr-lg-5" href="../index.html">
-        <img src="../../assets/template/assets/img/brand/white.png"> 
+        <img class="img-fluid" src="../assets/img/brand/white.png " >
       </a>
       <!-- pulsante aldo dx visibile quando non in fullscreen -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
@@ -141,74 +131,135 @@
     </div>
   </nav>
   <!-- End Navbar -->
-  <section class="section section-shaped section-lg">
-    <div class="shape shape-style-1 bg-gradient-default">
-      <div class="shape shape-default">
-        <img class="bg-image" src="../assets/img/pages/mohamed.jpg" style="width: 110%;">
+  
+  <div class="wrapper">
+    <div class="section section-hero section-shaped">
+        <div class="shape shape-default">
+            <img class="bg-image" src="../assets/img/pages/mohamed.jpg" style="width: 110%;">
       </div>
-    </div>
-    <div class="container pt-lg-7">
-      <div class="row justify-content-center">
-        <div class="col-lg-5">
-          <div class="card bg-secondary shadow border-0">
-            <!-- <div class="card-header bg-white pb-5">
-              <div class="text-muted text-center mb-3"><small>Sign in with</small></div>
-              <div class="btn-wrapper text-center">
-                <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"><img src="../assets/img/icons/common/github.svg"></span>
-                  <span class="btn-inner--text">Github</span>
-                </a>
-                <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>
-                  <span class="btn-inner--text">Google</span>
-                </a>
+      <div class="page-header">
+        <div class="container shape-container d-flex align-items-center py-lg">
+          <div class="col px-0">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-lg-6 text-center">
+                <h1 class="text-white display-1">Make your reservation</h1>
+                <h2 class="display-4 font-weight-normal text-white">The time is right now!</h2>
               </div>
-            </div> -->
-            <div class="card-body px-lg-5 py-lg-5">
-              <div class="text-center text-muted mb-4">
-                <h1 class="display-1">Signin page</h1>
-                <h3>Already registered?</h3>
-                <small>Sign in with credentials</small>
-              </div>
-              <form role="form">
-                <div class="form-group mb-3">
-                  <div class="input-group input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                    </div>
-                    <input class="form-control" placeholder="Email" type="email">
-                  </div>
-                </div>
-                <div class="form-group focused">
-                  <div class="input-group input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                    </div>
-                    <input class="form-control" placeholder="Password" type="password">
-                  </div>
-                </div>
-                <!-- <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
-                  <label class="custom-control-label" for=" customCheckLogin"><span>Remember me</span></label>
-                </div> -->
-                <div class="text-center">
-                  <button type="button" class="btn btn-primary my-4">Sign in</button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="row mt-3">
-            <!-- <div class="col-6">
-              <a href="#" class="text-light"><small>Forgot password?</small></a>
-            </div> -->
-            <div class="col-6 row text-right">
-              <a href="#" class="text-light"><strong>Create new account</strong></a>
             </div>
           </div>
         </div>
       </div>
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
     </div>
-  </section>
+    
+    <div class="beach-picker">
+
+        <div class="page-header">
+            <div class="container shape-container d-flex align-items-center py-lg">
+              <div class="col px-0">
+                <div class="row align-items-center justify-content-center">
+                  <div class="col-lg-6 text-center">
+                    <h1 class="text-black display-1">Chose your beach umbrella</h1>
+                    <h2 class="display-4 font-weight-normal text-black">Click on the side button and select your location!</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th>Beach chairs</th>
+                    <th>Description</th>
+                    <th>Price per day</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td class="td-actions text-right">1</td>
+                    <td>basic umbrella</td>
+                    <td>20€</td>
+                    <td class="td-actions text-right">
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input class="custom-control-input" id="customCheck1" type="checkbox">
+                            <label class="custom-control-label" for="customCheck1">Unchecked</label>
+                          </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td class="td-actions text-right">2</td>
+                    <td>basic umbrella</td>
+                    <td>20€</td>
+                    <td class="td-actions text-right">
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input class="custom-control-input" id="customCheck1" type="checkbox">
+                            <label class="custom-control-label" for="customCheck1">Unchecked</label>
+                          </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td class="td-actions text-right">3</td>
+                    <td>basic umbrella</td>
+                    <td>20€</td>
+                    <td class="td-actions text-right">
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input class="custom-control-input" id="customCheck1" type="checkbox">
+                            <label class="custom-control-label" for="customCheck1">Unchecked</label>
+                          </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td class="td-actions text-right">4</td>
+                    <td>basic umbrella</td>
+                    <td>20€</td>
+                    <td class="td-actions text-right">
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input class="custom-control-input" id="customCheck1" type="checkbox">
+                            <label class="custom-control-label" for="customCheck1">Unchecked</label>
+                          </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td class="td-actions text-right">5</td>
+                    <td>basic umbrella</td>
+                    <td>20€</td>
+                    <td class="td-actions text-right">
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input class="custom-control-input" id="customCheck1" type="checkbox">
+                            <label class="custom-control-label" for="customCheck1">Unchecked</label>
+                          </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>  
+
+        <div class="page-header">
+            <div class="container shape-container d-flex align-items-center py-lg">
+              <div class="col px-0">
+                <div class="row align-items-center justify-content-center">
+                  <div class="col-lg-6 text-center">
+                    <h2 class="display-4 font-weight-normal text-black">Make sure you select the right chalet</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+    </div>
+
   <footer class="footer">
     <div class="container">
       <div class="row row-grid align-items-center mb-5">
@@ -251,30 +302,6 @@
       </div>
     </div>
   </footer>
-  <!--   Core JS Files   -->
-  <script src="/src/assets/template/assets/js/core/jquery.min.js" type="text/javascript"></script>
-  <script src="/src/assets/template/assets/js/core/popper.min.js" type="text/javascript"></script>
-  <script src="/src/assets/template/assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-  <script src="/src/assets/template/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script> -->
-  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-  <script src="/src/assets/template/assets/js/plugins/bootstrap-switch.js"></script>
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="/src/assets/template/assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
-  <script src="/src/assets/template/assets/js/plugins/moment.min.js"></script>
-  <script src="/src/assets/template/assets/js/plugins/datetimepicker.js" type="text/javascript"></script>
-  <script src="/src/assets/template/assets/js/plugins/datetimepicker.js"></script> 
-  <!-- Control Center for Argon UI Kit: parallax effects, scripts for the example pages etc -->
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <script src="/src/assets/template/assets/js/argon-design-system.min.js?v=1.2.2" type="text/javascript"></script>
-  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-  <script>
-    window.TrackJS &&
-      TrackJS.install({
-        token: "ee6fab19c5a04ac1a32a645abde4613a",
-        application: "argon-design-system-pro"
-      });
-  </script> 
-</body>
 
-</html>
+
+

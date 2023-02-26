@@ -15,11 +15,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 
 export class LoginComponent implements OnInit{
-
   message: string;
-  data : Date = new Date();
-  focus : boolean;
-  focus1 : boolean;
 
   form: FormGroup = new FormGroup({
     username: new FormControl(''),
@@ -32,17 +28,10 @@ export class LoginComponent implements OnInit{
       private http: HttpClient
       ) { 
     this.message = '';
-    this.focus = false; 
-    this.focus1 = false; 
   }
 
   // Se on init il parametro message è valorizzato a false scrivo invalid credentials
   ngOnInit(): void {
-    var body = document.getElementsByTagName('body')[0];
-    body.classList.add('login-page');
-
-    var navbar = document.getElementsByTagName('nav')[0];
-    navbar.classList.add('navbar-transparent');
 
     this.ActivatedRoute.queryParams
       .subscribe(params => {
@@ -57,9 +46,7 @@ export class LoginComponent implements OnInit{
   submit() {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let formObj = this.form.getRawValue();
-    console.log("raw form: " + formObj);
-    let serializedForm = JSON.stringify(formObj); 
-    console.log("json form: " + serializedForm); 
+    let serializedForm = JSON.stringify(formObj);
     this.http
       .post('http://localhost:4200/api/auth/signin', serializedForm, {headers: headers})
       .subscribe({

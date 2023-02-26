@@ -1,25 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
-
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { BeachesComponent } from './beaches/beaches.component';
+import { DatesComponent } from './dates/dates.component';
+import { LocationsComponent } from './locations/locations.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'signup', component: RegistrationComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'signup', component: SignupComponent }
+  { path: 'beaches', component: BeachesComponent },
+  { path: 'dates', component: DatesComponent },
+  { path: 'locations', component: LocationsComponent }
 ];
 
 @NgModule({
-  imports: [
-      RouterModule.forRoot(routes),
-      BrowserModule,
-      CommonModule
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
