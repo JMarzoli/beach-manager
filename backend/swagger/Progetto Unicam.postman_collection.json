@@ -1,0 +1,499 @@
+{
+	"info": {
+		"_postman_id": "1e472175-646b-44aa-808b-10009167fb7f",
+		"name": "Progetto Unicam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26024364"
+	},
+	"item": [
+		{
+			"name": "/api/auth/signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"admin23\",\n\t\"email\":\"admin23@gmail.com\",\n\t\"password\":\"password\",\n\t\"roles\":[\"admin\"]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/auth/signin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"admin23\",\n\t\"password\":\"password\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/user-data",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjc3NDE5NjA0LCJleHAiOjE2Nzc1MDYwMDR9.PjajewbCOQISyqtC08Qnc7IfpfYtzqQBhRj_yU_Q7tg"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/user-data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user-data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/beach",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjc3NDE5MzI3LCJleHAiOjE2Nzc1MDU3Mjd9.jC_79pLwFb6dB2yREyTkRX0TeJ9qpN1TiEowsBOF8q0"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/beach",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"beach"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/beach",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1",
+						"disabled": true
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjc3NDE5MzI3LCJleHAiOjE2Nzc1MDU3Mjd9.jC_79pLwFb6dB2yREyTkRX0TeJ9qpN1TiEowsBOF8q0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Rimini\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/beach",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"beach"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/beach/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjc3NDE5NjM0LCJleHAiOjE2Nzc1MDYwMzR9.QRNnf9qO7Gu3jE6b3a12Xrz6-aLr22d46l2ZgHaO_zY"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/beach/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"beach",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/beach/:id/locations",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3MTg4MDk1LCJleHAiOjE2NzcyNzQ0OTV9.3kV_DR-T10_Xdau4KfphA2BblWRQHneZQf6F2pC4pF0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/beach/2/locations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"beach",
+						"2",
+						"locations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/beach/:id/locations/:id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3MTg4MDk1LCJleHAiOjE2NzcyNzQ0OTV9.3kV_DR-T10_Xdau4KfphA2BblWRQHneZQf6F2pC4pF0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/beach/2/locations/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"beach",
+						"2",
+						"locations",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/beach/:id/locations",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3MTg4MDk1LCJleHAiOjE2NzcyNzQ0OTV9.3kV_DR-T10_Xdau4KfphA2BblWRQHneZQf6F2pC4pF0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ombrella_number\": 3,\n    \"price\": 20,\n    \"beachId\":2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/beach/1/locations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"beach",
+						"1",
+						"locations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/beach/:id/locations/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3MTg4MDk1LCJleHAiOjE2NzcyNzQ0OTV9.3kV_DR-T10_Xdau4KfphA2BblWRQHneZQf6F2pC4pF0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/beach/2/locations/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"beach",
+						"2",
+						"locations",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/reservation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3NDE1ODM3LCJleHAiOjE2Nzc1MDIyMzd9.-GtUFK41K9XgaXF4imbLnp0VBzyGaHWuigxtwB-m9R8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"date_start\": \"2022-01-01T23:00:00.000Z\",\n    \"date_end\": \"2023-01-01T23:00:00.000Z\",\n    \"locationId\":2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/reservation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/reservation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3NDE1ODM3LCJleHAiOjE2Nzc1MDIyMzd9.-GtUFK41K9XgaXF4imbLnp0VBzyGaHWuigxtwB-m9R8"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/reservation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/reservation/:id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3NDE1ODM3LCJleHAiOjE2Nzc1MDIyMzd9.-GtUFK41K9XgaXF4imbLnp0VBzyGaHWuigxtwB-m9R8"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/reservation/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservation",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/reservation/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "HTTPBot-iOS/2022.2.1"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3NDE1ODM3LCJleHAiOjE2Nzc1MDIyMzd9.-GtUFK41K9XgaXF4imbLnp0VBzyGaHWuigxtwB-m9R8"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/reservation/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservation",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
