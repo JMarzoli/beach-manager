@@ -1,4 +1,4 @@
-const { authJwt } = require("../middleware");
+const { authJwt, verifyOwner } = require("../middleware");
 const controller = require("../controllers/beach.controller");
 
 module.exports = function(app) {
@@ -22,12 +22,12 @@ module.exports = function(app) {
   );
   app.post(
     "/api/beach",
-    [authJwt.verifyToken],
+    [authJwt.verifyToken, authJwt.isAdmin],
     controller.addBeach
   );
   app.delete(
     "/api/beach/:beachId",
-    [authJwt.verifyToken],
+    [authJwt.verifyToken, authJwt.isAdmin, verifyOwner.checkBeachOwner],
     controller.deleteBeach
   );
 };
