@@ -49,7 +49,7 @@ export class RegistrationComponent implements OnInit{
     let serializedForm = JSON.stringify(formObj); 
     console.log("json form: " + serializedForm); 
     this.http
-        .post('http://localhost:4200/api/auth/signup', serializedForm, {headers: headers})
+        .post('http://localhost:8080/api/auth/signup', serializedForm, {headers: headers})
         .subscribe({
             next: data => this.redirect(JSON.parse(JSON.stringify(data))),
             error: data => this.redirect(JSON.parse(JSON.stringify(data)))

@@ -15,6 +15,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 
 export class LoginComponent implements OnInit{
+
   message: string;
 
   form: FormGroup = new FormGroup({
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit{
     let serializedForm = JSON.stringify(formObj);
     console.log(serializedForm);
     this.http
-      .post('http://localhost:4200/api/auth/signin', serializedForm, {headers: headers})
+      .post('http://localhost:8080/api/auth/signin', serializedForm, {headers: headers})
       .subscribe({
         next: data => this.redirect(JSON.parse(JSON.stringify(data))),
         error: data => this.redirect(JSON.parse(JSON.stringify(data))),
