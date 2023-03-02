@@ -8,11 +8,11 @@ import { RegistrationComponent } from './registration/registration.component';
 import { BeachesComponent } from './beaches/beaches.component';
 import { DatesComponent } from './dates/dates.component';
 import { LocationsComponent } from './locations/locations.component';
+import { RegistrationModule } from './registration/registration.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent,
     BeachesComponent,
     DatesComponent,
     LocationsComponent,
@@ -20,7 +20,8 @@ import { LocationsComponent } from './locations/locations.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LoginModule
+    LoginModule,
+    RegistrationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -142,7 +142,7 @@
                   </a>
                 </div>
               </div> -->
-              <div class="card-body px-lg-5 py-lg-5">
+              <div class="card-body px-lg-5 py-lg-5" [formGroup]="form" (ngSubmit)="submit()">
                 <div class="text-center text-muted mb-4">
                   <h1 class="display-1">Signup page</h1>
                   <h3>Are you new?</h3>
@@ -154,7 +154,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Name" type="text">
+                      <input class="form-control" placeholder="Username" type="text" formControlName="username">
                     </div>
                   </div>
                   <div class="form-group">
@@ -162,7 +162,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Email" type="email">
+                      <input class="form-control" placeholder="Email" type="email" formControlName="email">
                     </div>
                   </div>
                   <div class="form-group focused">
@@ -170,7 +170,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                       </div>
-                      <input class="form-control" placeholder="Password" type="password">
+                      <input class="form-control" placeholder="Password" type="password" formControlName="password">
                     </div>
                   </div>
                   <!-- <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div> -->
@@ -183,7 +183,7 @@
                     </div>
                   </div> -->
                   <div class="text-center">
-                    <button type="button" class="btn btn-primary mt-4">Create account</button>
+                    <button type="submit" class="btn btn-primary mt-4">Create account</button>
                   </div>
                 </form>
               </div>

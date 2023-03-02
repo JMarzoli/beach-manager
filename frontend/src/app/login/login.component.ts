@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit{
 
   // Se on init il parametro message è valorizzato a false scrivo invalid credentials
   ngOnInit(): void {
-
     this.ActivatedRoute.queryParams
       .subscribe(params => {
         if(params['message'] === 'false'){
@@ -40,13 +39,13 @@ export class LoginComponent implements OnInit{
         }
       }
     );
-
   }
   
   submit() {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let formObj = this.form.getRawValue();
     let serializedForm = JSON.stringify(formObj);
+    console.log(serializedForm);
     this.http
       .post('http://localhost:4200/api/auth/signin', serializedForm, {headers: headers})
       .subscribe({
