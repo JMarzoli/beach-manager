@@ -1,15 +1,15 @@
 //https://github.com/bezkoder/node-js-jwt-auth
 
 const express = require("express");
-const cors = require("cors");
+//const cors = require("cors");
 
 const app = express();
 
-var corsOptions = {
+/*var corsOptions = {
   origin: "http://localhost:8081"
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions));*/
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -33,9 +33,11 @@ require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/beach.routes')(app);
 require('./app/routes/reservation.routes')(app);
+require('./app/routes/location.routes')(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = 8080;
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
@@ -45,14 +47,9 @@ function initial() {
     id: 1,
     name: "user"
   });
- 
+
   Role.create({
     id: 2,
-    name: "moderator"
-  });
- 
-  Role.create({
-    id: 3,
     name: "admin"
   });
 }

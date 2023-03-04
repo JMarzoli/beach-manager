@@ -4,11 +4,10 @@ var jwt = require("jsonwebtoken");
 
 const Op = db.Sequelize.Op;
 
-
   
 exports.userBoard = (req, res) => {
   User.findOne({
-    
+    attributes: {exclude: ['password']},
     where: {
       id: jwt.decode(req.headers["x-access-token"]).id
     }
