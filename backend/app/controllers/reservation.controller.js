@@ -5,7 +5,13 @@ const Reservation = db.reservation;
 const Op = db.Sequelize.Op;
 
 exports.readReservations = (req, res) => {
-    Reservation.findAll()
+    Reservation.findAll(
+        {
+            where: {
+                userId: jwt.decode(req.headers["x-access-token"]).id
+            }
+        }
+    )
     .then(reservations => {
             const responseJson = {
                 elements:reservations
@@ -33,7 +39,8 @@ exports.addReservation = (req, res) => {
 exports.readReservation = (req, res) => {
     Reservation.findOne({
             where: {
-                id: req.params.reservationId
+                id: req.params.reservationId,
+                userId: jwt.decode(req.headers["x-access-token"]).id
             }
         }
     )
@@ -46,7 +53,8 @@ exports.readReservation = (req, res) => {
 exports.deleteReservation = (req, res) => {
     Reservation.destroy({
             where: {
-                id: req.params.reservationId
+                id: req.params.reservationId,
+                userId: jwt.decode(req.headers["x-access-token"]).id
             }
         }
     )
