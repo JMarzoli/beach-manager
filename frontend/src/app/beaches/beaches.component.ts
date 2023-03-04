@@ -17,15 +17,19 @@ import { BeachesModule } from './beaches.module';
 })
 export class BeachesComponent implements OnInit {
 
-  beachesUrl = 'http://localhost:4200/api/beach'; 
+  beachesUrl = 'http://localhost:4200/api/beach';
+  reservationUrl = 'http://localhost:4200/api/reservation';  
   locationsUrl = '';
-  accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3OTQwNDY1LCJleHAiOjE2NzgwMjY4NjV9.OiaMxXaG4j56yxV2Wjc2YxTHIvz-QWqK12myci8KI18"
+  accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3OTUxMDc2LCJleHAiOjE2NzgwMzc0NzZ9.4Rlu6TijjG6fd8noeOAtUnMIy_Vs1ZUbAGc5VQXuqfY"
   beachesHeader = new HttpHeaders().set('x-access-token', this.accessToken);
   locationsHeader = new HttpHeaders().set('x-acces-token', this.accessToken); 
   beaches: Array<any>; 
   locations: Array<any>; 
-  beachLocationsId: any; 
-  showLocations: boolean; 
+  reservationLocations: Array<any>;
+  beachLocationsId: any;
+  reservationBody = {}; 
+  showLocations: boolean;
+  showDatePicker: boolean;  
 
   constructor(
     private _router: Router, 
@@ -34,7 +38,9 @@ export class BeachesComponent implements OnInit {
     ) { 
       this.beaches = new Array<any>();
       this.locations = new Array<any>();
+      this.reservationLocations = new Array<any>(); 
       this.showLocations = false; 
+      this.showDatePicker = false;
     }
     
   ngOnInit(): void {
@@ -45,11 +51,26 @@ export class BeachesComponent implements OnInit {
 
   // shows the locations of the selected beach 
   selectBeach(beachId: any) {
-    console.log("submit works!");
     this.getLocations(beachId).subscribe(
-      (data) => { this.locations = data.locations }
+      (data) => { this.locations = data.elements }
     ); 
     this.showLocations = !this.showLocations; 
+  }
+
+  selectDates(){
+    this.showDatePicker = true; 
+  }
+
+  // TODO aggiungere logica che crea il body dinamicamente
+  submitReservation(){
+    this.reservationBody = {    
+      "date_start": "2032-01-01T23:00:00.000Z",
+      "date_end": "2043-01-01T23:00:00.000Z",
+      "locationId":2
+    }
+    this.http.post(this.reservationUrl, this.reservationBody, {headers: this.beachesHeader})
+              .subscribe(data => { console.log("reservation data: " + data) }
+              );
   }
 
   // calls the api for retriving the beaches 

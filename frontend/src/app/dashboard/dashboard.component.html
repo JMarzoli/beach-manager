@@ -145,6 +145,19 @@
     
     <div class="beach-picker">
 
+      <div class="page-header">
+        <div class="container shape-container d-flex align-items-center py-lg">
+          <div class="col px-0">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-lg-6 text-center">
+                <h1 class="text-black display-1">Check your profile informations</h1>
+                <h2 class="display-4 font-weight-normal text-black">Here you can view all your information</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
         <div class="page-header">
             <div class="container shape-container d-flex align-items-center py-lg">
               <div class="col px-0">
@@ -161,43 +174,19 @@
           <table class="table">
             <thead>
                 <tr>
-                    <th class="text-center">#</th>
-                    <th>Date</th>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Price</th>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">From</th>
+                    <th class="text-center">To</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td >01/01/2023</td>
-                    <td>01/06/2023</td>
-                    <td>01/07/2023</td>
-                    <td>200,00</td>
+                <tr *ngFor="let res of userReservation"> 
+                    <td class="text-center"> {{res.id}} </td>
+                    <td class="text-center"> {{res.date_start}} </td>
+                    <td class="text-center"> {{res.date_end}} </td>
                     <td class="td-actions text-right">
-                        <button type="button" class="btn btn-danger btn-sm">Cancel</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td >01/01/2023</td>
-                    <td>01/06/2023</td>
-                    <td>01/07/2023</td>
-                    <td>200,00</td>
-                    <td class="td-actions text-right">
-                        <button type="button" class="btn btn-danger btn-sm">Cancel</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td >01/01/2023</td>
-                    <td>01/06/2023</td>
-                    <td>01/07/2023</td>
-                    <td>200,00</td>
-                    <td class="td-actions text-right">
-                        <button type="button" class="btn btn-danger btn-sm">Cancel</button>
+                        <button type="button" class="btn btn-danger btn-sm" (click)="deleteReservation(res.id)">Cancel</button>
                     </td>
                 </tr>
             </tbody>
@@ -208,7 +197,7 @@
               <div class="col px-0">
                 <div class="row align-items-center justify-content-center">
                   <div class="col-lg-6 text-center">
-                    <h2 class="display-4 font-weight-normal text-black">Make sure you select the right chalet</h2>
+                    <h2 class="display-4 font-weight-normal text-black">lorem ipsus</h2>
                   </div>
                 </div>
               </div>
