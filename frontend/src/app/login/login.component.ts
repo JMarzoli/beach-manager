@@ -46,9 +46,8 @@ export class LoginComponent implements OnInit{
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let formObj = this.form.getRawValue();
     let serializedForm = JSON.stringify(formObj);
-    console.log(serializedForm);
     this.http
-      .post('http://localhost:8080/api/auth/signin', serializedForm, {headers: headers})
+      .post('http://localhost:4200/api/auth/signin', serializedForm, {headers: headers})
       .subscribe({
         next: data => this.redirect(JSON.parse(JSON.stringify(data))),
         error: data => this.redirect(JSON.parse(JSON.stringify(data))),

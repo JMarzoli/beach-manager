@@ -19,7 +19,7 @@
                 <img src="/assets/img/brand/blue.png">
               </a>
             </div>
-            <!-- x per chiudere finestra-->
+            <!-- x per chiudere finestra -->
             <div class="col-6 collapse-close">
               <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
                 <span></span>
@@ -150,7 +150,7 @@
                 <div class="row align-items-center justify-content-center">
                   <div class="col-lg-6 text-center">
                     <h1 class="text-black display-1">Chose the beach you want</h1>
-                    <h2 class="display-4 font-weight-normal text-black">Click on the side button and procede with the reservation</h2>
+                    <h2 class="display-4 font-weight-normal text-black">Click on the side button to display the locations</h2>
                   </div>
                 </div>
               </div>
@@ -161,61 +161,84 @@
             <thead>
                 <tr>
                     <th class="text-center">#</th>
-                    <th>Name</th>
-                    <th>City</th>
+                    <th class="text-center">Name</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td >Balneare 1</td>
-                    <td>Civitanova Marche</td>
-                    <td class="td-actions text-right">
-                        <button type="button" class="btn btn-primary btn-sm">Check avaiability</button>
+                <tr *ngFor="let beach of beaches" >
+                    <td class="text-center">
+                      {{beach.id}}
                     </td>
-                </tr>
-                <tr>
-                    <td class="text-center">2</td>
-                    <td >Balneare 2</td>
-                    <td>Civitanova Marche</td>
-                    <td class="td-actions text-right">
-                        <button type="button" class="btn btn-primary btn-sm">Check avaiability</button>
+                    <td class="text-center">
+                      {{beach.name}}
                     </td>
-                </tr>
-                <tr>
-                    <td class="text-center">3</td>
-                    <td >Balneare 3</td>
-                    <td>Civitanova Marche</td>
                     <td class="td-actions text-right">
-                        <button type="button" class="btn btn-primary btn-sm">Check avaiability</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center">4</td>
-                    <td >Balneare 4</td>
-                    <td>Civitanova Marche</td>
-                    <td class="td-actions text-right">
-                        <button type="button" class="btn btn-primary btn-sm">Check avaiability</button>
+                        <button type="button" class="btn btn-primary btn-sm " (click)="selectBeach(beach.id)">Check avaiability</button>
                     </td>
                 </tr>
             </tbody>
         </table>  
 
-        <div class="page-header">
-            <div class="container shape-container d-flex align-items-center py-lg">
-              <div class="col px-0">
-                <div class="row align-items-center justify-content-center">
-                  <div class="col-lg-6 text-center">
-                    <h2 class="display-4 font-weight-normal text-black">Make sure you select the right chalet</h2>
-                  </div>
+        <div class="page-header" *ngIf="!showLocations; else elseBlock">
+          <div class="container shape-container d-flex align-items-center py-lg">
+            <div class="col px-0">
+              <div class="row align-items-center justify-content-center">
+                <div class="col-lg-6 text-center">
+                  <h2 class="display-4 font-weight-normal text-black">Select one beach to view the locations</h2>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
+        <ng-template #elseBlock> 
+          <div *ngIf="showLocations">
+            <div class="page-header">
+              <div class="container shape-container d-flex align-items-center py-lg">
+                <div class="col px-0">
+                  <div class="row align-items-center justify-content-center">
+                    <div class="col-lg-6 text-center">
+                      <h2 class="display-4 font-weight-normal text-black">Select the location from the below list</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center">Beach Id</th>
+                    <th class="text-center">Cost</th>
+                    <th class="text-center">Umbrellas</th>
+                    <th class="text-right"> 
+                      <div class="custom-control custom-checkbox mb-3">
+                        <input class="custom-control-input" id="customCheck1" type="checkbox">
+                        <label class="custom-control-label" for="customCheck1">Unchecked</label>
+                      </div>
+                    </th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let location in location">
+                <td> {{location.id}} </td>
+                <td> {{location.beachId}} </td>
+                <td> {{location.cost}} </td>
+                <td> {{location.umbrellas}} </td>
+                <td></td>
+              </tbody>
+            </table>
+          </div>
+
+        </ng-template>
+
+        
+
+        
 
     </div>
+
+
 
   <footer class="footer">
     <div class="container">

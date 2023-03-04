@@ -45,11 +45,9 @@ export class RegistrationComponent implements OnInit{
   submit() {
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let formObj = this.form.getRawValue();
-    console.log("raw form: " + formObj);
     let serializedForm = JSON.stringify(formObj); 
-    console.log("json form: " + serializedForm); 
     this.http
-        .post('http://localhost:8080/api/auth/signup', serializedForm, {headers: headers})
+        .post('http://localhost:4200/api/auth/signup', serializedForm, {headers: headers})
         .subscribe({
             next: data => this.redirect(JSON.parse(JSON.stringify(data))),
             error: data => this.redirect(JSON.parse(JSON.stringify(data)))
