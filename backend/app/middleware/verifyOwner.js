@@ -11,14 +11,17 @@ checkBeachOwner = (req, res, next) => {
             }
         })
         .then(beach => {
-            if(beach.userId === jwt.decode(req.headers["x-access-token"]).id){
+            if(beach.userId !== jwt.decode(req.headers["x-access-token"]).id){
                 res.status(401).send({
                     message: "Failed! operation not permitted"
                 });
                 return;
             }
             next();
-        });
+        })
+        .catch(err => {
+            res.status(500).send({ message: err.message });
+          });;
     }
 
 };
@@ -31,14 +34,17 @@ checkReservationOwner = (req, res, next) => {
             }
         })
         .then(reservation => {
-            if(reservation.userId === jwt.decode(req.headers["x-access-token"]).id){
+            if(reservation.userId !== jwt.decode(req.headers["x-access-token"]).id){
                 res.status(401).send({
                     message: "Failed! operation not permitted"
                 });
                 return;
             }
             next();
-        });
+        })
+        .catch(err => {
+            res.status(500).send({ message: err.message });
+          });;
     }
 
 };

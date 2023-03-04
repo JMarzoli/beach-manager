@@ -23,7 +23,7 @@ exports.readLocations = (req, res) => {
 exports.addLocation = (req, res) => {
     Location.create({
         ombrella_number: req.body.ombrella_number,
-        beachId: req.body.beachId,
+        beachId: req.params.beachId,
         price: req.body.price,
       })
         .then(location => {
