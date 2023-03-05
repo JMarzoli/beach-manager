@@ -2,23 +2,43 @@
 Repository for the "Progettazione di Applicazioni Web e Mobile" course of the University of Camerino
 
 ## Intro/Scenario
-	//TODO descrizione
-	Prenotazione ombrellone
+	Il sistema rappresenta una versione molto basilare di un gestionale per gestori e clienti di chalet di mare. Il sistema viene usato dai gestori per registrate le spiagge di loro proprietò e dai clienti per poter effettuare prenotazione nelle spiagge prensenti nel sistema. 
 ### Funzinalità principali utente
-	- Login
-	- Selezione e visualizzazione spiagge
-	- Prenotazione ombrellore
-	- Gestione prenotazione
+	- Registrazione e Login
+	- Visualizzare l'elenco delle spiagge presenti nel sistema
+	- Visualizzare l'elenco delle postazioni prenotabili di un determinata spiaggia
+	- Effettuare un prenotazione di una postazione di una determinata spiaggia, per un determinato lasso di tempo 
+	- Accedere alla propria area personale, dove l'utente potrà visualizzare le sue prenotazioni
+	- Eliminare una prenotazione 
 ### Funzionalità principali gestore
-	- Login
-	- Creazione spiaggia
+	- Registrazione e Login
+	- Accedere alla propria pagina di ammistrazione
+	- Visualizzare l'elenco delle propriE spiagge presenti nel sistema
+	- Aggiungere una nuova spiaggia nel sistema
+	- Eliminare una spiaggia di sua proprietà dal sistema
+	- Visualizzare l'elenco di postazioni prenotabili presenti nel sistema
+	- Aggiungere una postazione ad una spiaggia
+	- Eliminare un postazione da una spiaggia
 	- Specifica configurazioni prenotazione (numero massimo, costo, ecc)
 
 @Julian
-## Fronend
-### Templete di grafica preso da:
-	//TODO
-	// Il primo che ho trovato: https://www.creative-tim.com/templates/angular-free
+## Frontend
+### Tecnologie
+	1. Angular - il frontend è stato costruito usando questo framework open source. La scelta di utilizzare proprio questo strumento è stata fatta dopo aver considerato che, per il tipo di applicazione, la scelta più consona era una single-page application. Angular inoltre ci ha assicurato che l'applicazione fosse visualizzabile anche da browser mobile come smartphone e tablet, questo perchè il framework è detto reponsiveness, cioè il design del sito web si adetta alle dimensioni dello schermo del dispositivo. 
+	2. Argon Design System - per riuscire ad avere una estetica più piacevole e unifiorme delle varie pagine è stato usato un template basato su:
+		- Bootstrap 4
+		- JQuery - libreria JavaScript
+		- Open Sans Font - una typeface open surce
+	La documentazione del template è presente al link: "https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html". 
+	Le pagine dell'applicazione sono state disegnate in html utilizzando gli stili e gli elementi messi a disposizione dal template. 
+	3. JWT Interceptor
+### Elenco routes
+	Le ruotes per muoversi attraverso le varie pagine dell'applicazione sono: 
+	- /signup : pagina di registrazione dove è possibile scegliere se registrarsi come cliente o gestore
+	- /login : pagina di login dove posso autenticarsi sia clienti che gestori
+	- /dashboard : pagina in cui un utente può vedere la lista delle prenotazioni che ha effettuato ed eliminarle
+	- /admin : pagine in cui un gestore può visualizzare le proprie spiagge, aggiungerne o eliminarne, le postazioni associate ad ogni spiaggia e ha la possibilità di aggiungerne delle nuove o eliminare quelle già presenti. 
+	- /beaches : pagina in cui è possibile visualizzare le spiagge presenti nel sistema ed effettuare una prenotazione ad uan di essa
 
 @Leonid
 ## Backend
@@ -63,7 +83,9 @@ Repository for the "Progettazione di Applicazioni Web e Mobile" course of the Un
 	- Table Profilo Utente: [ id (key) | username | email | password hash ]
     	- Tabella contente le informazioni utente
 
-@Leonid
+@Leonid - @Julian
 ## Autenticazione
 	L'autenticazione tra client e server avviene trami un codice JWT. L'api utilizzata per la generazione del codice è /api/auth/signup. Ad ogni chiamata del client verso una rotta lato backend il backend nodejs verifica la validità del codice utilizzando la libreria jsonwebtoken (utilizzata anche per la generazione del codice JWT). L'algoritmo per la firma del JWT e quindi per il criptaggio con chiave simmetrica dell'hash SHA256 è HS256.
 	Il modulo utilizzato la generazione dell'utenza e del salvataggio della password hash nel database è auth.controller.
+	-------------------------------------
+	Lato frontend quando si effettua l'operazione di login, viene recuperato dalla risposta http il token generato. Ci si avvale poi del LocalStorage, ovvero di una memoria del browser del client, per poter salvare questo token. Si è poi definito un servizio interceptor, implmentando l'intefaccia HttpInterceptor messa a disposizione dal modulo @angular/common/http, che intercetta ogni richiesta http effettuata al backend e inietta nell'header della richiesta il token di autenticazione. In questo modo una volta che un utente ha effettuato l'autenticazione, esso sarà in grado di muoversi liberamente ed utilizzare i servizi desiderati. 
