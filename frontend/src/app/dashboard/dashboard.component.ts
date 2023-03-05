@@ -13,8 +13,6 @@ export class DashboardComponent implements OnInit {
 
   userDataUrl = 'http://localhost:4200/api/user-data'
   userReservationsUrl = 'http://localhost:4200/api/reservation'
-  accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3OTUxMDc2LCJleHAiOjE2NzgwMzc0NzZ9.4Rlu6TijjG6fd8noeOAtUnMIy_Vs1ZUbAGc5VQXuqfY"
-  header = new HttpHeaders().set('x-access-token', this.accessToken);
   userData: any;
   userReservation: Array<any>;
 
@@ -39,14 +37,14 @@ export class DashboardComponent implements OnInit {
   deleteReservation(reservationId: any) {
     let url = `http://localhost:4200/api/reservation/${reservationId}`;
     console.log("Chiamata: " + url);
-    this.http.delete(url, {headers: this.header}).subscribe();
+    this.http.delete(url).subscribe();
   }
 
   getUserData(): Observable<any> {
-    return this.http.get<any>(this.userDataUrl, {headers: this.header})
+    return this.http.get<any>(this.userDataUrl)
   }
 
   getUserReservation(): Observable<any> {
-    return this.http.get<any>(this.userReservationsUrl, {headers: this.header})
+    return this.http.get<any>(this.userReservationsUrl)
   }
 }

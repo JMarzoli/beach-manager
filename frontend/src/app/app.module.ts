@@ -4,9 +4,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { RegistrationModule } from './registration/registration.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import {NgFor, NgForOf} from "@angular/common";
+import { JwtInterceptorService } from './interceptors/jwt-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import {NgFor, NgForOf} from "@angular/common";
     NgFor,
     NgForOf
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

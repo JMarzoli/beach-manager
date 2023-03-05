@@ -19,10 +19,7 @@ export class BeachesComponent implements OnInit {
 
   beachesUrl = 'http://localhost:4200/api/beach';
   reservationUrl = 'http://localhost:4200/api/reservation';  
-  locationsUrl = '';
-  accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3OTUxMDc2LCJleHAiOjE2NzgwMzc0NzZ9.4Rlu6TijjG6fd8noeOAtUnMIy_Vs1ZUbAGc5VQXuqfY"
-  beachesHeader = new HttpHeaders().set('x-access-token', this.accessToken);
-  locationsHeader = new HttpHeaders().set('x-acces-token', this.accessToken); 
+  locationsUrl = ''; 
   beaches: Array<any>; 
   locations: Array<any>; 
   reservationLocations: Array<any>;
@@ -68,21 +65,21 @@ export class BeachesComponent implements OnInit {
       "date_end": "2043-01-01T23:00:00.000Z",
       "locationId":2
     }
-    this.http.post(this.reservationUrl, this.reservationBody, {headers: this.beachesHeader})
+    this.http.post(this.reservationUrl, this.reservationBody)
               .subscribe(data => { console.log("reservation data: " + data) }
               );
   }
 
   // calls the api for retriving the beaches 
   getBeaches(): Observable<any> {
-    return this.http.get<any>(this.beachesUrl, {headers: this.beachesHeader})
+    return this.http.get<any>(this.beachesUrl)
   }
 
   // calls the api for retriving the location of a particular beach 
   getLocations(beachId : any): Observable<any> {
     this.locationsUrl = `http://localhost:4200/api/beach/${beachId}/locations`;
     console.log("Chiamata all'url: " + this.locationsUrl);  
-    return this.http.get<any>(this.locationsUrl, {headers: this.beachesHeader})
+    return this.http.get<any>(this.locationsUrl)
   }
 
 

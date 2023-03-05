@@ -49,7 +49,10 @@ export class LoginComponent implements OnInit{
     this.http
       .post('http://localhost:4200/api/auth/signin', serializedForm, {headers: headers})
       .subscribe({
-        next: data => this.redirect(JSON.parse(JSON.stringify(data))),
+        next: (data: any) => { 
+          localStorage.setItem('token', data.accessToken);
+          this.redirect(JSON.parse(JSON.stringify(data))); 
+        },
         error: data => this.redirect(JSON.parse(JSON.stringify(data))),
       });
   }
