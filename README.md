@@ -30,7 +30,6 @@ Il sistema rappresenta una versione molto basilare di un gestionale per gestori 
 	- Open Sans Font - una typeface open source
 La documentazione del template è presente al link: "https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html". 
 Le pagine dell'applicazione sono state disegnate in html utilizzando gli stili e gli elementi messi a disposizione dal template. 
-3. JWT Interceptor
 ### Elenco routes
 Le ruotes per muoversi attraverso le varie pagine dell'applicazione sono: 
 - /signup : pagina di registrazione dove è possibile scegliere se registrarsi come cliente o gestore
@@ -86,3 +85,7 @@ Lato database sino state create le seguenti tabelle:
 L'autenticazione tra client e server avviene trami un codice JWT. L'api utilizzata per la generazione del codice è /api/auth/signup. Ad ogni chiamata del client verso una rotta lato backend il backend nodejs verifica la validità del codice utilizzando la libreria jsonwebtoken (utilizzata anche per la generazione del codice JWT). L'algoritmo per la firma del JWT e quindi per il criptaggio con chiave simmetrica dell'hash SHA256 è HS256.
 Il modulo utilizzato la generazione dell'utenza e del salvataggio della password hash nel database è auth.controller.
 Lato frontend quando si effettua l'operazione di login, viene recuperato dalla risposta http il token generato. Ci si avvale poi del LocalStorage, ovvero di una memoria del browser del client, per poter salvare questo token. Si è poi definito un servizio interceptor, implmentando l'intefaccia HttpInterceptor messa a disposizione dal modulo @angular/common/http, che intercetta ogni richiesta http effettuata al backend e inietta nell'header della richiesta il token di autenticazione. In questo modo una volta che un utente ha effettuato l'autenticazione, esso sarà in grado di muoversi liberamente ed utilizzare i servizi desiderati. 
+
+###CORS
+Per ovviare alle problematiche di violazione del CORS è stato implmentato un proxy. Questo proxy è stato istruito a reindirizzare tutte le chiamate che il frontend effettuta verso se stesso al backend. Questo viene fatto tramite un file di congifiguarazione del proxy che specifica il path e l'url di reindirizzamento. 
+
