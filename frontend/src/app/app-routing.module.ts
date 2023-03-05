@@ -4,12 +4,14 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { BeachesComponent } from './beaches/beaches.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegistrationComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'admin', component: AdminDashboardComponent},
   { path: 'beaches', component: BeachesComponent },
 ];
 
