@@ -15,13 +15,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class RegistrationComponent implements OnInit{
 
-  message: string; 
+  message: string
+  
+  accountType: string
 
   form: FormGroup = new FormGroup({
     username : new FormControl(''),
     email : new FormControl(''),
     password : new FormControl(''),
-    role : new FormControl('["user"]') // qui si potrebbe aggiungere scelta 
+    role : new FormControl('')  
  });
 
   constructor(
@@ -30,6 +32,7 @@ export class RegistrationComponent implements OnInit{
     private http: HttpClient
     ) { 
       this.message = ''
+      this.accountType = ''
   }
 
   ngOnInit(): void {
@@ -43,6 +46,7 @@ export class RegistrationComponent implements OnInit{
   }
 
   submit() {
+    console.log(this.accountType); 
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let formObj = this.form.getRawValue();
     let serializedForm = JSON.stringify(formObj); 
@@ -59,16 +63,20 @@ redirect(response: Object) {
   const tokenKey = 'sigupToken' as ObjectKey;
   var destination = 'login'; 
   var params = {}; 
-
   if(response[tokenKey]) {
    destination = 'login'; 
   } else {
    params = {message:false}
   }
-
   this._router.navigate(
    [destination],{queryParams: params}
    )
+}
+
+//sets the account type to create
+public setRole(type: string){
+  this.form.get("role")?.setValue(type); 
+  console.log(this.form.get("role")?.getRawValue.toString); 
 }
 
 }

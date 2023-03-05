@@ -173,6 +173,21 @@
                       <input class="form-control" placeholder="Password" type="password" formControlName="password">
                     </div>
                   </div>
+                  <div class="text-center">
+                    <div class="text-center text-muted mb-4">
+                      <small>Select the type of account</small>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" (click)="setRole('user')">
+                      <label class="custom-control-label" for="customRadioInline1">Customer</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" (click)="setRole('admin')">
+                      <label class="custom-control-label" for="customRadioInline2">Manager</label>
+                    </div>
+                  </div>
+
+                  
                   <!-- <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div> -->
                   <!-- <div class="row my-4">
                     <div class="col-12">
@@ -183,7 +198,7 @@
                     </div>
                   </div> -->
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary mt-4">Create account</button>
+                    <button type="submit" class="btn btn-primary mt-4" (click)="submit()">Create account</button>
                   </div>
                 </form>
               </div>

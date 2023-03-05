@@ -7,7 +7,7 @@ import { RegistrationModule } from './registration/registration.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import {NgFor, NgForOf} from "@angular/common";
-import { JwtInterceptorService } from './interceptors/jwt-interceptor.service';
+import { JwtInterceptorService } from './interceptor/jwt-interceptor.service';
 
 @NgModule({
   declarations: [
