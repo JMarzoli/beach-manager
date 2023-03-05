@@ -84,7 +84,7 @@ Lato database sino state create le seguenti tabelle:
     - Tabella contente le informazioni utente
 
 @Leonid - @Julian
-## Autenticazione
+### Autenticazione
 L'autenticazione tra client e server avviene trami un codice JWT. L'api utilizzata per la generazione del codice è /api/auth/signup. Ad ogni chiamata del client verso una rotta lato backend il backend nodejs verifica la validità del codice utilizzando la libreria jsonwebtoken (utilizzata anche per la generazione del codice JWT). L'algoritmo per la firma del JWT e quindi per il criptaggio con chiave simmetrica dell'hash SHA256 è HS256.
 Il modulo utilizzato la generazione dell'utenza e del salvataggio della password hash nel database è auth.controller.
 -------------------------------------
