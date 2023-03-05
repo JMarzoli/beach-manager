@@ -119,7 +119,6 @@
   <!-- End Navbar -->
   
   <div class="wrapper">
-    
     <div class="section section-hero section-shaped">
         <div class="shape shape-default">
             <img class="bg-image" src="/assets/img/pages/administration.jpg" style="width: 100%;">
@@ -202,7 +201,6 @@
                     </tr>
                 </tbody>
             </table>
-            
             <div *ngIf="displayLocations; else locList">
                 <div class="page-header">
                     <div class="container shape-container d-flex align-items-center py-lg">
@@ -284,12 +282,10 @@
                         <div class="text-center">
                             <h6>Press the button to add the new location to the beach</h6>
                             <button type="submit" class="btn btn-primary my-4" (click)="createLocation()">Create location</button>
-                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-
             <ng-template #locList>
                 <div class="page-header">
                     <div class="container shape-container d-flex align-items-center py-lg">
@@ -302,13 +298,51 @@
                       </div>
                     </div>
                 </div> 
-            </ng-template>
-                
-            </div>
-        
-            
+            </ng-template>   
+        </div>
         <div *ngSwitchCase="'createBeach'">
-            <p>create beach works</p>
+            <div class="page-header">
+                <div class="container shape-container d-flex align-items-center py-lg">
+                  <div class="col px-0">
+                    <div class="row align-items-center justify-content-center">
+                      <div class="col-lg-6 text-center">
+                        <h2 class="display-4 font-weight-normal text-black">Here you can add a new beach to the system</h2>
+                        <h6>Complete the form whit the informations</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <form [formGroup]="newBeachForm" (ngSubmit)="createBeach()">
+                <div>
+                    <h6 class="text-center">Insert the name of the beach</h6>
+                    <input type="text" class="form-control" placeholder="Beach name" formControlName="name">
+                </div>
+            </form>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary my-4" (click)="createBeach()">Create beach</button>
+            </div> 
+            <div class="page-header">
+                <div class="container shape-container d-flex align-items-center py-lg">
+                  <div class="col px-0">
+                    <div class="row align-items-center justify-content-center">
+                      <div class="col-lg-6 text-center">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div *ngSwitchDefault>
+            <div class="container shape-container d-flex align-items-center py-lg">
+                <div class="col px-0">
+                  <div class="row align-items-center justify-content-center">
+                    <div class="col-lg-6 text-center">
+                      <h6>Select one option to display the details</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
     </div>
 

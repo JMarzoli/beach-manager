@@ -13,6 +13,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class AdminDashboardComponent implements OnInit {
 
   beachesUrl = 'http://localhost:4200/api/beach';
+  headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   beaches: Array<any>;
   locations: Array<any>; 
   displayLocations: boolean; 
@@ -23,6 +24,9 @@ export class AdminDashboardComponent implements OnInit {
     beachId: new FormControl(''),
     ombrella_number: new FormControl(''),
     price: new FormControl('')
+  })
+  newBeachForm: FormGroup = new FormGroup({
+    name: new FormControl('')
   })
 
   constructor(
@@ -78,16 +82,22 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   createLocation(){
-    console.log("Entrato nel createLocation()");
     this.newLocationForm.get("beachId")?.setValue(this.focusBeachId); 
-    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let formObj = this.newLocationForm.getRawValue();
     let serializedForm = JSON.stringify(formObj);
-    console.log("Serialized form: " + serializedForm);
     let url = `http://localhost:4200/api/beach/${this.focusBeachId}/locations`;
-    this.http.post(url, serializedForm, {headers: headers}).subscribe(
+    this.http.post(url, serializedForm, {headers: this.headers}).subscribe(
       data => { console.log(data); }
     ) 
+  }
+
+  createBeach(){
+    let formObj = this.newBeachForm.getRawValue();
+    let serializedForm = JSON.stringify(formObj);
+    console.log("Serialized form: " + serializedForm); 
+    this.http.post(this.beachesUrl, serializedForm, {headers: this.headers}). subscribe(
+      data => { console.log(data) }
+    )
   }
 
 }

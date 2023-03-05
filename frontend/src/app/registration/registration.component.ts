@@ -46,7 +46,6 @@ export class RegistrationComponent implements OnInit{
   }
 
   submit() {
-    console.log(this.accountType); 
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let formObj = this.form.getRawValue();
     let serializedForm = JSON.stringify(formObj); 
