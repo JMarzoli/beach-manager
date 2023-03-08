@@ -4,7 +4,9 @@ var jwt = require("jsonwebtoken");
 
 const Op = db.Sequelize.Op;
 
-  
+/**
+ * Provides the infos of a user, by is id 
+ */
 exports.userBoard = (req, res) => {
   User.findOne({
     attributes: {exclude: ['password']},
@@ -17,15 +19,14 @@ exports.userBoard = (req, res) => {
   });
 };
 
+exports.allAccess = (req, res) => {
+  res.status(200).send("Public Content.");
+};
 
-  exports.allAccess = (req, res) => {
-    res.status(200).send("Public Content.");
-  };
+exports.adminBoard = (req, res) => {
+  res.status(200).send("Admin Content.");
+};
 
-  exports.adminBoard = (req, res) => {
-    res.status(200).send("Admin Content.");
-  };
-  
-  exports.moderatorBoard = (req, res) => {
-    res.status(200).send("Moderator Content.");
-  };
+exports.moderatorBoard = (req, res) => {
+  res.status(200).send("Moderator Content.");
+};

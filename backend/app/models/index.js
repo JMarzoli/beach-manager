@@ -1,6 +1,7 @@
-const config = require("../config/db.config.js");
+const config = require("../config/db.config.js"); // imports the configuaration file of the db 
 
 const Sequelize = require("sequelize");
+
 const sequelize = new Sequelize(
   config.DB,
   config.USER,

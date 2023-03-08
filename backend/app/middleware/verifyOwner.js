@@ -3,6 +3,9 @@ var jwt = require("jsonwebtoken");
 const Beach = db.beach;
 const Reservation = db.reservation;
 
+/**
+ * Checks if a userId is the owner of a specific beach, in negative case a 401 is returned in response 
+ */
 checkBeachOwner = (req, res, next) => {
     if(!isNaN(req.params.beachId)){
         Beach.findOne({
@@ -26,6 +29,9 @@ checkBeachOwner = (req, res, next) => {
 
 };
 
+/**
+ * Checks if a specific reservations wase made by a specific user, in negative case a 401 status will be send in response 
+ */
 checkReservationOwner = (req, res, next) => {
     if(!isNaN(req.params.reservationId)){
         Reservation.findOne({

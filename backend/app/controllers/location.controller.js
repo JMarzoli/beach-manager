@@ -3,6 +3,9 @@ const Location = db.location;
 
 const Op = db.Sequelize.Op;
 
+/**
+ * Provides all the location associated to a given beach 
+ */
 exports.readLocations = (req, res) => {
     Location.findAll(
         {
@@ -20,6 +23,9 @@ exports.readLocations = (req, res) => {
     );
 };
 
+/**
+ * Creates a new location associated to a beach and adds it to the db
+ */
 exports.addLocation = (req, res) => {
     Location.create({
         ombrella_number: req.body.ombrella_number,
@@ -34,6 +40,9 @@ exports.addLocation = (req, res) => {
         });
 };
 
+/**
+ * Provides the infos of a location by the beachid and locationid
+ */
 exports.readLocation = (req, res) => {
     Location.findOne({
         where: {
@@ -49,6 +58,9 @@ exports.readLocation = (req, res) => {
     );
 };
 
+/**
+ * Delete a location of a beach ,by the beachid and the locationId, from the db 
+ */
 exports.deleteLocation = (req, res) => {
     Location.destroy({
         where: {

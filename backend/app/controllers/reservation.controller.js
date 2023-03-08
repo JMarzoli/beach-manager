@@ -4,6 +4,9 @@ const Reservation = db.reservation;
 
 const Op = db.Sequelize.Op;
 
+/**
+ * Provides all the reservations stored in the db 
+ */
 exports.readReservations = (req, res) => {
     Reservation.findAll(
         {
@@ -21,6 +24,9 @@ exports.readReservations = (req, res) => {
     );
 };
 
+/**
+ * Create a new reservation and stores it in the db 
+ */
 exports.addReservation = (req, res) => {
     Reservation.create({
         locationId: req.body.locationId,
@@ -36,6 +42,9 @@ exports.addReservation = (req, res) => {
         });
 };
 
+/**
+ * Provides the info of a specifice reservation, by the give id 
+ */
 exports.readReservation = (req, res) => {
     Reservation.findOne({
             where: {
@@ -50,6 +59,9 @@ exports.readReservation = (req, res) => {
     );
 };
 
+/**
+ * Removes a specified reservation from the db, by his id 
+ */
 exports.deleteReservation = (req, res) => {
     Reservation.destroy({
             where: {

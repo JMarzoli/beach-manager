@@ -8,8 +8,10 @@ const Op = db.Sequelize.Op;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
+/**
+ * Creates a new user and saves it on db 
+ */
 exports.signup = (req, res) => {
-  // Save User to Database
   User.create({
     username: req.body.username,
     email: req.body.email,
@@ -40,6 +42,9 @@ exports.signup = (req, res) => {
     });
 };
 
+/**
+ * Authorize the session of a registered user
+ */
 exports.signin = (req, res) => {
   User.findOne({
     where: {
@@ -51,11 +56,13 @@ exports.signin = (req, res) => {
         return res.status(404).send({ message: "User Not found." });
       }
 
+      // checks if the password provided matches whit the passowrd in the db 
       var passwordIsValid = bcrypt.compareSync(
         req.body.password,
         user.password
       );
 
+      // password not matching 
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
@@ -63,10 +70,12 @@ exports.signin = (req, res) => {
         });
       }
 
+      // password matching, creating a token  
       var token = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: 86400 // 24 hours
+        expiresIn: 86400 // the token has a validity of 24 hours
       });
 
+      // retriving the roles of the user and sending the response
       var authorities = [];
       user.getRoles().then(roles => {
         for (let i = 0; i < roles.length; i++) {

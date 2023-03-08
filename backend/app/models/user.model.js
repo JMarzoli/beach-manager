@@ -1,3 +1,6 @@
+/**
+ * Defines a model for a user of the system
+ */
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("users", {
       username: {
@@ -10,6 +13,5 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       }
     });
-  
     return User;
   };
