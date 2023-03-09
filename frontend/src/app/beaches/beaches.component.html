@@ -94,66 +94,49 @@
                     <th class="text-right">Add</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr *ngFor="let location of locations; index as i">
+              <tbody *ngFor="let location of locations; index as i">
+                <tr>
                     <td class="text-center"> {{location.id}} </td>
                     <td class="text-center"> {{location.ombrella_number}} </td>
                     <td class="text-center"> {{location.price}} </td>
-                    <td class="text-right">
-                      <div class="custom-control custom-checkbox mb-3">
-                        <input class="custom-control-input" id=`customCeck{{i}}` type="checkbox">
-                        <label class="custom-control-label" for=`customCeck{{i}}`></label>
-                      </div>
+                    <td class="td-actions text-right">
+                      <button type="button" class="btn btn-primary btn-sm" (click)="(displayDatePicker(location.id))">Book</button>
                     </td>
                 </tr>
+                <tr *ngIf="location.displayDatePicker">
+                  <div class="text-center"> 
+                    <h6 class="display-4 font-weight-normal text-black">Select the starting day and the ending day</h6>
+                    <div class="form-group" [formGroup]="reservation" (ngSubmit)="submitReservation(location.id)">
+                      <div>
+                        <small class="text-center">Enter the starting day</small>
+                        <div class="input-group input-group-alternative">
+                            <input class="form-control datepicker" placeholder="Start date" type="date" value="" formControlName="date_start">
+                        </div>
+                      </div>
+                      <div>
+                        <small class="text-center">Enter the endind day</small>
+                        <div class="input-group input-group-alternative">
+                            <input class="form-control datepicker" placeholder="End date" type="date" value="" formControlName="date_end"> 
+                        </div>
+                      </div>
+                      <div class="text-center">
+                        <h6 class="small">Press the button to submit your reservation</h6>
+                        <button type="submit" class="btn btn-primary mt-4" (click)="submitReservation(location.id)">Sumbit reservation</button>
+                      </div>
+                      <div class="alert alert-success" role="alert" *ngIf="successAlert">
+                        Reservation created succesfully! 
+                      </div>
+                      <div class="alert alert-danger" role="alert" *ngIf="errorAlert">
+                        Reservation not created! 
+                      </div>
+                    </div>
+                  </div>
+                </tr>
               </tbody>
+
+                
             </table>
-          </div>
-          <div class="text-center">
-            <h4>Press the button to procede whit the date picker</h4>
-            <button type="submit" class="btn btn-primary my-4" (click)="selectDates()">Select time interval</button>
           </div>
         </ng-template>
 
-        <div *ngIf="showDatePicker">
-          <div class="page-header">
-            <div class="container shape-container d-flex align-items-center py-lg">
-              <div class="col px-0">
-                <div class="row align-items-center justify-content-center">
-                  <div class="col-lg-6 text-center">
-                    <h2 class="display-4 font-weight-normal text-black">Select the starting day and the ending day</h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="input-daterange datepicker align-items-center container">
-            <div class="col">
-                <div class="form-group">
-                  <p class="text-muted text-center"><strong>Chose the starting day</strong></p>
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                        </div>
-                        <input class="form-control" placeholder="Start date" type="text" value="06/18/2020">
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                  <p class="text-muted text-center"><strong>Chose the ending day</strong></p>
-                    <div class="input-group input-group-alternative">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                        </div>
-                        <input class="form-control" placeholder="End date" type="text" value="06/22/2020">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="text-center">
-          <h4>Press the button to submit your reservation</h4>
-          <button type="submit" class="btn btn-primary my-4" (click)="submitReservation()">Submit reservation</button>
-        </div>
-      </div>
-    </div>
+        

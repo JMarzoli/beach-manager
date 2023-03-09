@@ -5,10 +5,11 @@
 
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders , } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BeachesModule } from './beaches.module';
 
+import { BeachesModule } from './beaches.module';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-beaches',
@@ -26,7 +27,14 @@ export class BeachesComponent implements OnInit {
   beachLocationsId: any;
   reservationBody = {}; 
   showLocations: boolean;
-  showDatePicker: boolean;  
+  successAlert = false; 
+  errorAlert = false; 
+  range: any; 
+  reservation: FormGroup = new FormGroup({
+    date_start: new FormControl(''),
+    date_end: new FormControl(''),
+    locationId: new FormControl('')
+  })
 
   constructor(
     private _router: Router, 
@@ -37,10 +45,10 @@ export class BeachesComponent implements OnInit {
       this.locations = new Array<any>();
       this.reservationLocations = new Array<any>(); 
       this.showLocations = false; 
-      this.showDatePicker = false;
     }
     
   ngOnInit(): void {
+    // retriving all the beaches from backend
     this.getBeaches().subscribe(
       (data) => { this.beaches = data.elements; }
     )
@@ -50,24 +58,35 @@ export class BeachesComponent implements OnInit {
   selectBeach(beachId: any) {
     this.getLocations(beachId).subscribe(
       (data) => { this.locations = data.elements }
-    ); 
+    );
+    this.beaches.forEach(function(item){item.displayDatePicker = false; } )
     this.showLocations = !this.showLocations; 
   }
 
-  selectDates(){
-    this.showDatePicker = true; 
+  displayDatePicker(id:any){
+    let item = this.locations.find(i => i.id === id); 
+    item.displayDatePicker = !item.displayDatePicker; 
   }
 
+
   // TODO aggiungere logica che crea il body dinamicamente
-  submitReservation(){
-    this.reservationBody = {    
+  submitReservation(locationId:any){
+    /* this.reservationBody = {    
       "date_start": "2032-01-01T23:00:00.000Z",
       "date_end": "2043-01-01T23:00:00.000Z",
       "locationId":2
-    }
-    this.http.post(this.reservationUrl, this.reservationBody)
-              .subscribe(data => { console.log("reservation data: " + data) }
-              );
+    } */
+    this.reservation.get("locationId")?.setValue(locationId);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    let formObj = this.reservation.getRawValue();
+    let serializedForm = JSON.stringify(formObj);
+    console.log("Serialized form: " + serializedForm);  
+    this.http
+        .post(this.reservationUrl, serializedForm, {headers: headers})
+        .subscribe({
+          next: data => this.notifySuccess(JSON.parse(JSON.stringify(data))),
+          error: data => this.notifyError(JSON.parse(JSON.stringify(data)))
+        })
   }
 
   // calls the api for retriving the beaches 
@@ -82,6 +101,12 @@ export class BeachesComponent implements OnInit {
     return this.http.get<any>(this.locationsUrl)
   }
 
+  async notifySuccess(response: Object){
+    this.successAlert = !this.successAlert
+  }
+
+  notifyError(response: Object){
+  }
 
 }
 
