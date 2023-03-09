@@ -18,6 +18,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./beaches.component.scss']
 })
 
+export class BeachesComponent implements OnInit {
   beachesUrl = environment.apiUrl + '/api/beach';
   reservationUrl = environment.apiUrl + '/api/reservation';  
   headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
