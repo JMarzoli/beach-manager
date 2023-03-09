@@ -1,12 +1,14 @@
 /**
- * Author: @Julian - @Leonid
- * Description: componente che fornisce la possibilità ad un utente di prenotare postazioni 
+ * Author: @Julian & @Leonid
+ * Description: componente responsabile di gestire la prenotazione delle postazioni
  */
 
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders , } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+
 import { BeachesModule } from './beaches.module';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -16,10 +18,10 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./beaches.component.scss']
 })
 
-export class BeachesComponent implements OnInit {
-  beachesUrl = 'http://localhost:4200/api/beach';
-  reservationUrl = 'http://localhost:4200/api/reservation';  
+  beachesUrl = environment.apiUrl + '/api/beach';
+  reservationUrl = environment.apiUrl + '/api/reservation';  
   headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+  locationsUrl = ''; 
   beaches: Array<any>; 
   locations: Array<any>; 
   showLocations: boolean;
@@ -33,8 +35,6 @@ export class BeachesComponent implements OnInit {
   })
 
   constructor(
-    private _router: Router, 
-    private ActivatedRoute: ActivatedRoute, 
     private http: HttpClient
     ) { 
       this.beaches = new Array<any>();
@@ -85,8 +85,8 @@ export class BeachesComponent implements OnInit {
 
   // calls the api for retriving the location of a particular beach 
   getLocations(beachId : any): Observable<any> {
-    let url = this.beachesUrl.concat(`/${beachId}/locations`)
-    return this.http.get<any>(url)
+    this.locationsUrl = environment.apiUrl + `/api/beach/${beachId}/locations`;
+    return this.http.get<any>(this.locationsUrl)
   }
 
   // used for notify the succesfully created resvation at the user 

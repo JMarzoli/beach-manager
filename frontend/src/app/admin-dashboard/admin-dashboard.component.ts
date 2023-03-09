@@ -1,8 +1,14 @@
+/**
+ * Author: @Julian & @Leonid
+ * Description: admin panel, responsabile per la gestione delle spiagge
+ */
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -12,7 +18,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  beachesUrl = 'http://localhost:4200/api/beach';
+  beachesUrl = environment.apiUrl + 'api/beach';
   headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   beaches: Array<any>;
   locations: Array<any>; 
@@ -59,7 +65,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   getLocations(beachId: any) {
-    let url = `http://localhost:4200/api/beach/${beachId}/locations`;
+    let url = environment.apiUrl + `/api/beach/${beachId}/locations`;
     this.http.get<any>(url).subscribe(
       data => { this.locations = data.elements; }
     )
@@ -77,7 +83,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   deleteLocation(beachId: any, locationId: any){
-    let url = `http://localhost:4200/api/beach/${beachId}/locations/${locationId}`;
+    let url = environment.apiUrl + `/api/beach/${beachId}/locations/${locationId}`;
     this.http.delete(url).subscribe(); 
   }
 
@@ -85,7 +91,7 @@ export class AdminDashboardComponent implements OnInit {
     this.newLocationForm.get("beachId")?.setValue(this.focusBeachId); 
     let formObj = this.newLocationForm.getRawValue();
     let serializedForm = JSON.stringify(formObj);
-    let url = `http://localhost:4200/api/beach/${this.focusBeachId}/locations`;
+    let url = environment.apiUrl + `/api/beach/${this.focusBeachId}/locations`;
     this.http.post(url, serializedForm, {headers: this.headers}).subscribe(
       data => { console.log(data); }
     ) 

@@ -1,5 +1,5 @@
 /**
- * Author: @Julian
+ * Author: @Julian & @Leonid
  * Description: componenete responsabili di gestire la registrazione 
  */
 
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-registration',
@@ -50,7 +51,7 @@ export class RegistrationComponent implements OnInit{
     let formObj = this.form.getRawValue();
     let serializedForm = JSON.stringify(formObj); 
     this.http
-        .post('http://localhost:4200/api/auth/signup', serializedForm, {headers: headers})
+        .post(environment.apiUrl + '/api/auth/signup', serializedForm, {headers: headers})
         .subscribe({
             next: data => this.redirectLogin(JSON.parse(JSON.stringify(data))),
             error: data => this.redirectError(JSON.parse(JSON.stringify(data)))
