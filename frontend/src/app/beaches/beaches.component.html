@@ -23,7 +23,6 @@
     </div>
     
     <div class="beach-picker">
-
         <div class="page-header">
             <div class="container shape-container d-flex align-items-center py-lg">
               <div class="col px-0">
@@ -104,8 +103,9 @@
                     </td>
                 </tr>
                 <tr *ngIf="location.displayDatePicker">
-                  <div class="text-center"> 
-                    <h6 class="display-4 font-weight-normal text-black">Select the starting day and the ending day</h6>
+                  <div class=" card shadow text-center"> 
+                    <div class="card-body">
+                      <h6 class="display-4 font-weight-normal text-black">Select the starting day and the ending day</h6>
                     <div class="form-group" [formGroup]="reservation" (ngSubmit)="submitReservation(location.id)">
                       <div>
                         <small class="text-center">Enter the starting day</small>
@@ -130,11 +130,10 @@
                         Reservation not created! 
                       </div>
                     </div>
+                    </div>
                   </div>
                 </tr>
-              </tbody>
-
-                
+              </tbody> 
             </table>
           </div>
         </ng-template>

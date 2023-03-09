@@ -4,26 +4,19 @@
             <img class="bg-image" src="/assets/img/pages/mohamed.jpg" style="width: 100%;">
       </div>
       <div class="page-header">
-        <div class="container shape-container d-flex align-items-center py-lg">
+        <div class="container shape-container d-flex align-items-center ">
           <div class="col px-0">
             <div class="row align-items-center justify-content-center">
               <div class="col-lg-6 text-center">
-                <h1 class="text-white display-1">Check your profile</h1>
+                <h1 class="text-white display-1">Hi {{userData.username}}</h1>
                 <h2 class="display-4 font-weight-normal text-white">Keep your reservation under control</h2>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="separator separator-bottom separator-skew zindex-100">
-        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
-        </svg>
-      </div>
     </div>
-    
-    <div class="beach-picker">
-
+    <div class="dashboard" *ngIf="dataReady">
       <div class="page-header">
         <div class="container shape-container d-flex align-items-center py-lg">
           <div class="col px-0">
@@ -31,55 +24,97 @@
               <div class="col-lg-6 text-center">
                 <h1 class="text-black display-1">Check your profile informations</h1>
                 <h2 class="display-4 font-weight-normal text-black">Here you can view all your information</h2>
+                <table class="table">
+                  <thead>
+                      <tr>
+                          <th class="text-center">User ID:</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <td class="text-center"> {{userData.id}} </td>
+                  </tbody>
+                  <thead>
+                    <tr>
+                        <th class="text-center">Username:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <td class="text-center"> {{userData.username}} </td>
+                </tbody>
+                <thead>
+                  <tr>
+                      <th class="text-center">Email:</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <td class="text-center"> {{userData.email}} </td>
+              </tbody>
+              <thead>
+                <tr>
+                    <th class="text-center">Registered since:</th>
+                </tr>
+            </thead>
+            <tbody>
+              <td class="text-center"> {{userData.createdAt}} </td>
+            </tbody>
+              </table>  
               </div>
             </div>
           </div>
         </div>
       </div>
-
-        <div class="page-header">
-            <div class="container shape-container d-flex align-items-center py-lg">
-              <div class="col px-0">
-                <div class="row align-items-center justify-content-center">
-                  <div class="col-lg-6 text-center">
-                    <h1 class="text-black display-1">See all you reservation</h1>
-                    <h2 class="display-4 font-weight-normal text-black">Click on the side buttons to cancel the reservation</h2>
-                  </div>
+      <hr>
+      <div class="page-header">
+        <div class="container shape-container d-flex align-items-center py-lg">
+          <div class="col px-0">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-lg-6 text-center">
+                <h1 class="text-black display-1">See all you reservation</h1>
+                <h2 class="display-4 font-weight-normal text-black">Click on the side buttons to cancel the reservation</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card shadow" *ngFor="let res of userReservation">
+        <div class="card-body">
+            <div class="tab-content text-center" id="myTabContent">
+                <h6 class="text-center">Reservation id: </h6>
+                <p class="text-center"> {{res.id}} </p>
+                <h6 class="text-center">Starting date: </h6>
+                <p class="text-center"> {{res.date_start}} </p>
+                <h6 class="text-center">Ending date: </h6>
+                <p class="text-center"> {{res.date_end}} </p>
+                <button type="button" class="btn btn-danger btn" data-toggle="modal" data-target="#securityQuestion">Cancel</button>
+                <hr>
+             </div>
+          </div>
+          <div class="modal fade" id="securityQuestion" tabindex="-1" role="dialog" aria-labelledby="securityQuestionLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="securityQuestionLabel">Are you sure?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary btn-danger" data-dismiss="modal" (click)="deleteReservation(res.id)">Delete the reservation</button>
                 </div>
               </div>
             </div>
           </div>
-
-          <table class="table">
-            <thead>
-                <tr>
-                    <th class="text-center">Id</th>
-                    <th class="text-center">From</th>
-                    <th class="text-center">To</th>
-                    <th class="text-right">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let res of userReservation"> 
-                    <td class="text-center"> {{res.id}} </td>
-                    <td class="text-center"> {{res.date_start}} </td>
-                    <td class="text-center"> {{res.date_end}} </td>
-                    <td class="td-actions text-right">
-                        <button type="button" class="btn btn-danger btn-sm" (click)="deleteReservation(res.id)">Cancel</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>  
-
-        <div class="page-header">
-            <div class="container shape-container d-flex align-items-center py-lg">
-              <div class="col px-0">
-                <div class="row align-items-center justify-content-center">
-                  <div class="col-lg-6 text-center">
-                    <h2 class="display-4 font-weight-normal text-black">lorem ipsus</h2>
-                  </div>
-                </div>
+      </div>
+      <div class="page-header">
+        <div class="container shape-container d-flex align-items-center py-lg">
+          <div class="col px-0">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-lg-6 text-center">
+                <h2 class="display-4 font-weight-normal text-black">End of reservations</h2>
               </div>
             </div>
           </div>
+        </div>
+      </div>
     </div>

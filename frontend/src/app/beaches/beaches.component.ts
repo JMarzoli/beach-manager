@@ -1,13 +1,12 @@
 /**
- * Author: @Julian
- * Description: componente responsabile di gestire l'autenticazione
+ * Author: @Julian - @Leonid
+ * Description: componente che fornisce la possibilità ad un utente di prenotare postazioni 
  */
 
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders , } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
 import { BeachesModule } from './beaches.module';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -16,16 +15,13 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './beaches.component.html',
   styleUrls: ['./beaches.component.scss']
 })
-export class BeachesComponent implements OnInit {
 
+export class BeachesComponent implements OnInit {
   beachesUrl = 'http://localhost:4200/api/beach';
   reservationUrl = 'http://localhost:4200/api/reservation';  
-  locationsUrl = ''; 
+  headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   beaches: Array<any>; 
   locations: Array<any>; 
-  reservationLocations: Array<any>;
-  beachLocationsId: any;
-  reservationBody = {}; 
   showLocations: boolean;
   successAlert = false; 
   errorAlert = false; 
@@ -43,7 +39,6 @@ export class BeachesComponent implements OnInit {
     ) { 
       this.beaches = new Array<any>();
       this.locations = new Array<any>();
-      this.reservationLocations = new Array<any>(); 
       this.showLocations = false; 
     }
     
@@ -59,30 +54,24 @@ export class BeachesComponent implements OnInit {
     this.getLocations(beachId).subscribe(
       (data) => { this.locations = data.elements }
     );
+    // setting a parameter in each beach, used for showing or not the location 
     this.beaches.forEach(function(item){item.displayDatePicker = false; } )
     this.showLocations = !this.showLocations; 
   }
 
+  // used for opening the date picker of a location to reserve it 
   displayDatePicker(id:any){
     let item = this.locations.find(i => i.id === id); 
     item.displayDatePicker = !item.displayDatePicker; 
   }
 
-
-  // TODO aggiungere logica che crea il body dinamicamente
+  // stores a new reservation by calling the api 
   submitReservation(locationId:any){
-    /* this.reservationBody = {    
-      "date_start": "2032-01-01T23:00:00.000Z",
-      "date_end": "2043-01-01T23:00:00.000Z",
-      "locationId":2
-    } */
     this.reservation.get("locationId")?.setValue(locationId);
-    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let formObj = this.reservation.getRawValue();
     let serializedForm = JSON.stringify(formObj);
-    console.log("Serialized form: " + serializedForm);  
     this.http
-        .post(this.reservationUrl, serializedForm, {headers: headers})
+        .post(this.reservationUrl, serializedForm, {headers: this.headers})
         .subscribe({
           next: data => this.notifySuccess(JSON.parse(JSON.stringify(data))),
           error: data => this.notifyError(JSON.parse(JSON.stringify(data)))
@@ -96,16 +85,24 @@ export class BeachesComponent implements OnInit {
 
   // calls the api for retriving the location of a particular beach 
   getLocations(beachId : any): Observable<any> {
-    this.locationsUrl = `http://localhost:4200/api/beach/${beachId}/locations`;
-    console.log("Chiamata all'url: " + this.locationsUrl);  
-    return this.http.get<any>(this.locationsUrl)
+    let url = this.beachesUrl.concat(`/${beachId}/locations`)
+    return this.http.get<any>(url)
   }
 
+  // used for notify the succesfully created resvation at the user 
   async notifySuccess(response: Object){
     this.successAlert = !this.successAlert
+    setTimeout(() => {
+      this.successAlert = !this.successAlert;
+    }, 2500);
   }
 
+  // used for notify the user, that and error occurred and the reservation is not stored 
   notifyError(response: Object){
+    this.errorAlert = !this.errorAlert
+    setTimeout(() => {
+      this.errorAlert = !this.errorAlert;
+    }, 2500);
   }
 
 }

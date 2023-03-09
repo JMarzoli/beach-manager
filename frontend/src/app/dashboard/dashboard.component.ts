@@ -15,17 +15,17 @@ export class DashboardComponent implements OnInit {
   userReservationsUrl = 'http://localhost:4200/api/reservation'
   userData: any;
   userReservation: Array<any>;
+  dataReady: boolean = false;
 
   constructor(
     private http: HttpClient
     ) {
-      this.userData = undefined;
       this.userReservation = new Array<any>();
     }
 
   ngOnInit(): void {
     this.getUserData().subscribe(
-      data => { this.userData = data }  
+      data => { this.userData = data; this.dataReady = true; }  
     )
     this.getUserReservation().subscribe(
       data => { this.userReservation = data.elements }
@@ -33,9 +33,8 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteReservation(reservationId: any) {
-    let url = `http://localhost:4200/api/reservation/${reservationId}`;
-    console.log("Chiamata: " + url);
-    this.http.delete(url).subscribe();
+    let url = this.userReservationsUrl.concat(`/${reservationId}`);
+    this.http.delete(url).subscribe(() => this.reload() );
   }
 
   getUserData(): Observable<any> {
@@ -44,5 +43,9 @@ export class DashboardComponent implements OnInit {
 
   getUserReservation(): Observable<any> {
     return this.http.get<any>(this.userReservationsUrl)
+  }
+
+  reload(){
+    this.getUserReservation().subscribe(data => { this.userReservation = data.elements }); 
   }
 }
