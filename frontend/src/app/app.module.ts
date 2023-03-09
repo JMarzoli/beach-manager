@@ -10,6 +10,9 @@ import {NgFor, NgForOf} from "@angular/common";
 import { JwtInterceptorService } from './interceptor/jwt-interceptor.service';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
     HttpClientModule,
     CommonModule,
     NgFor,
-    NgForOf
+    NgForOf,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true }

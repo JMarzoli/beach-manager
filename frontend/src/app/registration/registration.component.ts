@@ -75,7 +75,6 @@ redirect(response: Object) {
 //sets the account type to create
 public setRole(type: string){
   this.form.get("role")?.setValue(type); 
-  console.log(this.form.get("role")?.getRawValue.toString); 
 }
 
 }
