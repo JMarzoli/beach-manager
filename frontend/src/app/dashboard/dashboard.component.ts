@@ -17,8 +17,6 @@ export class DashboardComponent implements OnInit {
   userReservation: Array<any>;
 
   constructor(
-    private _router: Router, 
-    private ActivatedRoute: ActivatedRoute, 
     private http: HttpClient
     ) {
       this.userData = undefined;

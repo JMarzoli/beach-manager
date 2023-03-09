@@ -89,4 +89,3 @@ Lato frontend quando si effettua l'operazione di login, viene recuperato dalla r
 ## CORS
 ### Proxy
 Per ovviare alle problematiche di violazione del CORS è stato implmentato un proxy. Questo proxy è stato istruito a reindirizzare tutte le chiamate che il frontend effettuta verso se stesso al backend. Questo viene fatto tramite un file di congifiguarazione del proxy che specifica il path e l'url di reindirizzamento. 
-

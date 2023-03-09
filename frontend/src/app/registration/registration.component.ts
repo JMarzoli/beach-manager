@@ -52,23 +52,23 @@ export class RegistrationComponent implements OnInit{
     this.http
         .post('http://localhost:4200/api/auth/signup', serializedForm, {headers: headers})
         .subscribe({
-            next: data => this.redirect(JSON.parse(JSON.stringify(data))),
-            error: data => this.redirect(JSON.parse(JSON.stringify(data)))
+            next: data => this.redirectLogin(JSON.parse(JSON.stringify(data))),
+            error: data => this.redirectError(JSON.parse(JSON.stringify(data)))
         })
 }
 
-redirect(response: Object) {
-  type ObjectKey = keyof typeof response; 
-  const tokenKey = 'sigupToken' as ObjectKey;
-  var destination = 'login'; 
+redirectError(response: Object) {
+  var destination = 'signup'; 
   var params = {}; 
-  if(response[tokenKey]) {
-   destination = 'login'; 
-  } else {
-   params = {message:false}
-  }
+  params = {message:false}
   this._router.navigate(
    [destination],{queryParams: params}
+   )
+}
+redirectLogin(response: Object){
+  const destination = 'login'; 
+  this._router.navigate(
+   [destination]
    )
 }
 
