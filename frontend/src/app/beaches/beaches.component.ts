@@ -1,12 +1,13 @@
 /**
- * Author: @Julian
- * Description: componente responsabile di gestire l'autenticazione
+ * Author: @Julian & @Leonid
+ * Description: componente responsabile di gestire la prenotazione delle postazioni
  */
 
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders , } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 import { BeachesModule } from './beaches.module';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -18,8 +19,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class BeachesComponent implements OnInit {
 
-  beachesUrl = 'http://localhost:4200/api/beach';
-  reservationUrl = 'http://localhost:4200/api/reservation';  
+  beachesUrl = environment.apiUrl + '/api/beach';
+  reservationUrl = environment.apiUrl + '/api/reservation';  
   locationsUrl = ''; 
   beaches: Array<any>; 
   locations: Array<any>; 
@@ -37,8 +38,6 @@ export class BeachesComponent implements OnInit {
   })
 
   constructor(
-    private _router: Router, 
-    private ActivatedRoute: ActivatedRoute, 
     private http: HttpClient
     ) { 
       this.beaches = new Array<any>();
@@ -96,7 +95,7 @@ export class BeachesComponent implements OnInit {
 
   // calls the api for retriving the location of a particular beach 
   getLocations(beachId : any): Observable<any> {
-    this.locationsUrl = `http://localhost:4200/api/beach/${beachId}/locations`;
+    this.locationsUrl = environment.apiUrl + `/api/beach/${beachId}/locations`;
     console.log("Chiamata all'url: " + this.locationsUrl);  
     return this.http.get<any>(this.locationsUrl)
   }

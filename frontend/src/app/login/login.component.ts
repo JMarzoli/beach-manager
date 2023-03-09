@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'my-app',
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit{
     let formObj = this.form.getRawValue();
     let serializedForm = JSON.stringify(formObj);
     this.http
-      .post('http://localhost:4200/api/auth/signin', serializedForm, {headers: headers})
+      .post(environment.apiUrl + '/api/auth/signin', serializedForm, {headers: headers})
       .subscribe({
         next: (data: any) => { 
           localStorage.setItem('token', data.accessToken);

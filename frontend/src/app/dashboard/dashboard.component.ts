@@ -1,8 +1,12 @@
+/**
+ * Author: @Leonid & @Julian
+ * Description: componente responsabile della visualizzazione delle prenotazioni, oltre alle informazioni utente
+ */
+
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { DasboardModule } from './dashboard.module';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,8 +15,8 @@ import { DasboardModule } from './dashboard.module';
 })
 export class DashboardComponent implements OnInit {
 
-  userDataUrl = 'http://localhost:4200/api/user-data'
-  userReservationsUrl = 'http://localhost:4200/api/reservation'
+  userDataUrl = environment.apiUrl+'/api/user-data'
+  userReservationsUrl = environment.apiUrl+'/api/reservation'
   userData: any;
   userReservation: Array<any>;
 
@@ -33,7 +37,7 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteReservation(reservationId: any) {
-    let url = `http://localhost:4200/api/reservation/${reservationId}`;
+    let url = environment.apiUrl+`/api/reservation/${reservationId}`;
     console.log("Chiamata: " + url);
     this.http.delete(url).subscribe();
   }
