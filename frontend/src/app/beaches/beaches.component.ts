@@ -81,7 +81,7 @@ export class BeachesComponent implements OnInit {
 
   // calls the api for retriving the beaches 
   getBeaches(): Observable<any> {
-    return this.http.get<any>(this.beachesUrl)
+    return this.http.get<any>(this.beachesUrl);
   }
 
   // calls the api for retriving the location of a particular beach 

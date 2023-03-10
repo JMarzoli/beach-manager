@@ -17,7 +17,7 @@ import { environment } from '../../environments/environment';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  beachesUrl = environment.apiUrl + 'api/beach';
+  beachesUrl = environment.apiUrl + '/api/beach';
   headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   beaches: Array<any>;
   locations: Array<any>; 
@@ -46,7 +46,7 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBeaches().subscribe(
-      (data) => { this.beaches = data.elements; console.log("On init " + data) }
+      (data) => { this.beaches = data.elements; }
     )
   }
 
