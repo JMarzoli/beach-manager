@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { environment } from '../../environments/environment';
 
-
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -47,7 +46,7 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBeaches().subscribe(
-      (data) => { this.beaches = data.elements; }
+      (data) => { this.beaches = data.elements; console.log("On init " + data) }
     )
   }
 
@@ -61,7 +60,7 @@ export class AdminDashboardComponent implements OnInit {
 
   // calls the api for retriving the beaches 
   getBeaches(): Observable<any> {
-    return this.http.get<any>(this.beachesUrl)
+    return this.http.get<any>(this.beachesUrl);
   }
 
   getLocations(beachId: any) {
@@ -100,7 +99,6 @@ export class AdminDashboardComponent implements OnInit {
   createBeach(){
     let formObj = this.newBeachForm.getRawValue();
     let serializedForm = JSON.stringify(formObj);
-    console.log("Serialized form: " + serializedForm); 
     this.http.post(this.beachesUrl, serializedForm, {headers: this.headers}). subscribe(
       data => { console.log(data) }
     )

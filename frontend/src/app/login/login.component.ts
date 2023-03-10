@@ -18,11 +18,13 @@ import { environment } from '../../environments/environment';
 export class LoginComponent implements OnInit{
 
   message: string;
+  errorAlert = false;  
 
   form: FormGroup = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
   });
+  roles: Array<any>;
 
   constructor(
       private _router: Router, 
@@ -30,6 +32,7 @@ export class LoginComponent implements OnInit{
       private http: HttpClient
       ) { 
     this.message = '';
+    this.roles = new Array<any>();
   }
 
   // Se on init il parametro message è valorizzato a false scrivo invalid credentials
@@ -52,9 +55,12 @@ export class LoginComponent implements OnInit{
       .subscribe({
         next: (data: any) => { 
           localStorage.setItem('token', data.accessToken);
+          this.roles = data.roles;
           this.redirect(JSON.parse(JSON.stringify(data))); 
         },
-        error: data => this.redirect(JSON.parse(JSON.stringify(data))),
+        error: data => {
+          this.redirect(JSON.parse(JSON.stringify(data)))
+        },
       });
   }
 
@@ -63,14 +69,25 @@ export class LoginComponent implements OnInit{
     const tokenKey = 'accessToken' as ObjectKey;
     var destination = 'login';
     var params = {};
-
     if(response[tokenKey]){
-      destination='dashboard';
+      if(this.roles.includes('ROLE_ADMIN')) {
+        destination = 'admin'
+      } else { destination = 'dashboard'; }
     }else{
-      params = { message:false}
+      this.notifyError(); 
+      params = { message:false }
     }
     this._router.navigate([destination],{ 
       queryParams: params
     })
   }
+
+  // used for notify the user, that and error occurred and the reservation is not stored 
+  notifyError(){
+    this.errorAlert = !this.errorAlert
+    setTimeout(() => {
+      this.errorAlert = !this.errorAlert;
+    }, 2500);
+   }
+
 }
