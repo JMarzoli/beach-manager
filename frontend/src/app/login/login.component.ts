@@ -4,7 +4,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -18,14 +18,14 @@ import { environment } from '../../environments/environment';
 export class LoginComponent implements OnInit{
 
   message: string;
-  errorAlert = false;  
-
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
+  errorAlert = false;
+  missingAlert = false;   
   roles: Array<any>;
-
+  form: FormGroup = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+  });
+  
   constructor(
       private _router: Router, 
       private ActivatedRoute: ActivatedRoute, 
@@ -47,21 +47,28 @@ export class LoginComponent implements OnInit{
   }
   
   submit() {
+    // if the form is not completed an alert is diplayed 
+    if(!this.form.valid){
+      this.notifyMissing(); 
+      return; 
+    }
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let formObj = this.form.getRawValue();
     let serializedForm = JSON.stringify(formObj);
     this.http
       .post(environment.apiUrl + '/api/auth/signin', serializedForm, {headers: headers})
       .subscribe({
-        next: (data: any) => { 
+        next: (data: any) => {
+          // saving the token in the local storage  
           localStorage.setItem('token', data.accessToken);
           this.roles = data.roles;
           this.redirect(JSON.parse(JSON.stringify(data))); 
         },
         error: data => {
+          this.notifyError(); 
           this.redirect(JSON.parse(JSON.stringify(data)))
         },
-      });
+      }); 
   }
 
   redirect(response: Object){
@@ -74,7 +81,6 @@ export class LoginComponent implements OnInit{
         destination = 'admin'
       } else { destination = 'dashboard'; }
     }else{
-      this.notifyError(); 
       params = { message:false }
     }
     this._router.navigate([destination],{ 
@@ -87,6 +93,14 @@ export class LoginComponent implements OnInit{
     this.errorAlert = !this.errorAlert
     setTimeout(() => {
       this.errorAlert = !this.errorAlert;
+    }, 2500);
+   }
+
+  // used for notify the user, that and error occurred and the reservation is not stored 
+  notifyMissing(){
+    this.missingAlert = !this.missingAlert
+    setTimeout(() => {
+      this.missingAlert = !this.missingAlert;
     }, 2500);
    }
 

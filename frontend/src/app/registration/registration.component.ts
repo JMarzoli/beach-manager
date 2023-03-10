@@ -4,7 +4,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -17,14 +17,15 @@ import { environment } from '../../environments/environment';
 export class RegistrationComponent implements OnInit{
 
   message: string
-  
   accountType: string
+  errorAlert = false; 
+  missingAlert = false; 
 
   form: FormGroup = new FormGroup({
-    username : new FormControl(''),
-    email : new FormControl(''),
-    password : new FormControl(''),
-    role : new FormControl('')  
+    username : new FormControl('', Validators.required),
+    email : new FormControl('', Validators.required),
+    password : new FormControl('', Validators.required),
+    role : new FormControl('', Validators.required)  
  });
 
   constructor(
@@ -43,10 +44,15 @@ export class RegistrationComponent implements OnInit{
                     this.message = 'Invalid credential'; 
                 }
             }
-        );
+    )
   }
 
   submit() {
+    if(!this.form.valid) {
+      this.notifyMissing();
+      console.log("invalid")
+      return; 
+    }
     const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     let formObj = this.form.getRawValue();
     let serializedForm = JSON.stringify(formObj); 
@@ -54,28 +60,47 @@ export class RegistrationComponent implements OnInit{
         .post(environment.apiUrl + '/api/auth/signup', serializedForm, {headers: headers})
         .subscribe({
             next: data => this.redirectLogin(JSON.parse(JSON.stringify(data))),
-            error: data => this.redirectError(JSON.parse(JSON.stringify(data)))
+            error: data => { 
+              this.notifyError(),
+              this.redirectError(JSON.parse(JSON.stringify(data))) 
+            }
         })
-}
+  } 
 
-redirectError(response: Object) {
-  var destination = 'signup'; 
-  var params = {}; 
-  params = {message:false}
-  this._router.navigate(
-   [destination],{queryParams: params}
-   )
-}
-redirectLogin(response: Object){
-  const destination = 'login'; 
-  this._router.navigate(
-   [destination]
-   )
-}
+  redirectError(response: Object) {
+    this.notifyError(); 
+    var params = {}; 
+    params = {message:false}; 
+  }
 
-//sets the account type to create
-public setRole(type: string){
-  this.form.get("role")?.setValue(type); 
-}
+  redirectLogin(response: Object){
+    const destination = 'login'; 
+    this._router.navigate(
+    [destination]
+    )
+  }
+
+  //sets the account type to create
+  public setRole(type: string){
+    this.form.get("role")?.setValue(type); 
+  }
+
+  // used for notify the user, that and error occurred and the reservation is not stored 
+  notifyError(){
+    console.log("error");
+    this.errorAlert = !this.errorAlert
+    setTimeout(() => {
+      this.errorAlert = !this.errorAlert;
+    }, 2500);  
+  }
+
+  // used for notify the user, that and error occurred and the reservation is not stored 
+  notifyMissing(){
+    console.log("error");
+    this.missingAlert = !this.missingAlert
+    setTimeout(() => {
+      this.missingAlert = !this.missingAlert;
+    }, 2500);
+  }
 
 }
