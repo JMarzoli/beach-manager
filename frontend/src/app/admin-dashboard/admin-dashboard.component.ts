@@ -7,7 +7,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -25,14 +25,18 @@ export class AdminDashboardComponent implements OnInit {
   action1 = ''; 
   action2 = '';
   focusBeachId: any;
+  missingAlert = false;
+  errorAlert = false;
+  successAlert = false;
   newLocationForm: FormGroup = new FormGroup({
-    beachId: new FormControl(''),
-    ombrella_number: new FormControl(''),
-    price: new FormControl('')
+    beachId: new FormControl('', Validators.required),
+    ombrella_number: new FormControl('', Validators.required),
+    price: new FormControl('', Validators.required)
   })
   newBeachForm: FormGroup = new FormGroup({
-    name: new FormControl('')
+    name: new FormControl('', Validators.required)
   })
+
 
   constructor(
     private _router: Router, 
@@ -45,9 +49,7 @@ export class AdminDashboardComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.getBeaches().subscribe(
-      (data) => { this.beaches = data.elements; }
-    )
+    this.reloadBeaches(); 
   }
 
   setAction1(action: string) {
@@ -78,30 +80,78 @@ export class AdminDashboardComponent implements OnInit {
 
   deleteBeach(id: any){
     let url = this.beachesUrl.concat(`/${id}`);
-    this.http.delete(url).subscribe(); 
+    this.http.delete(url).subscribe( () => this.reloadBeaches() ); 
   }
 
   deleteLocation(beachId: any, locationId: any){
     let url = environment.apiUrl + `/api/beach/${beachId}/locations/${locationId}`;
-    this.http.delete(url).subscribe(); 
+    this.http.delete(url).subscribe(() => this.reloadLocations(beachId)); 
   }
 
   createLocation(){
     this.newLocationForm.get("beachId")?.setValue(this.focusBeachId); 
+    if(!this.newLocationForm.valid){
+      this.notifyMissing();
+      return; 
+    }
     let formObj = this.newLocationForm.getRawValue();
     let serializedForm = JSON.stringify(formObj);
     let url = environment.apiUrl + `/api/beach/${this.focusBeachId}/locations`;
     this.http.post(url, serializedForm, {headers: this.headers}).subscribe(
-      data => { console.log(data); }
+      data => { 
+        this.notifySuccess(),
+        this.reloadLocations(this.focusBeachId)  
+      }
     ) 
   }
 
   createBeach(){
+    if(!this.newBeachForm.valid){
+      this.notifyMissing();
+      console.log("missing")
+      return; 
+    }
     let formObj = this.newBeachForm.getRawValue();
     let serializedForm = JSON.stringify(formObj);
     this.http.post(this.beachesUrl, serializedForm, {headers: this.headers}). subscribe(
-      data => { console.log(data) }
+      data => {
+        this.notifySuccess(),
+        this.reloadBeaches() 
+      }
     )
+  }
+
+  reloadBeaches(){
+    this.getBeaches().subscribe(data => { this.beaches = data.elements }); 
+  }
+
+  reloadLocations(id: any){
+    this.getLocations(id);
+  }
+
+  // used for notify the user, that and error occurred and the reservation is not stored 
+  notifyMissing(){
+    console.log("error");
+    this.missingAlert = !this.missingAlert
+    setTimeout(() => {
+      this.missingAlert = !this.missingAlert;
+    }, 2500);
+  }
+
+  notifyError(){
+    console.log("error");
+    this.errorAlert = !this.errorAlert
+    setTimeout(() => {
+      this.errorAlert = !this.errorAlert;
+    }, 2500);  
+  }
+
+  // used for notify the succesfully created resvation at the user 
+  notifySuccess(){
+    this.successAlert = !this.successAlert
+    setTimeout(() => {
+      this.successAlert = !this.successAlert;
+    }, 2500);
   }
 
 }
