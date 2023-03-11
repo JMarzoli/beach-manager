@@ -25,8 +25,14 @@ checkBeachOwner = (req, res, next) => {
         .catch(err => {
             res.status(500).send({ message: err.message });
           });;
+    }else{
+        res.status(401).send({
+            message: "Failed! operation not permitted"
+        });
+        return;
     }
-
+    
+    
 };
 
 /**
@@ -51,6 +57,11 @@ checkReservationOwner = (req, res, next) => {
         .catch(err => {
             res.status(500).send({ message: err.message });
           });;
+    }else{
+        res.status(401).send({
+            message: "Failed! operation not permitted"
+        });
+        return;
     }
 
 };
