@@ -1,4 +1,9 @@
-//https://github.com/bezkoder/node-js-jwt-auth
+/**
+ * Authors: @Leonid & @Julian
+ * Credits: https://github.com/bezkoder/node-js-jwt-auth
+ */
+
+
 
 const express = require("express");
 
@@ -10,6 +15,7 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(process.cwd()+"/public/"));
+
 // database
 const db = require("./app/models");
 const Role = db.role;
